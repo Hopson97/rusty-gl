@@ -5,7 +5,6 @@ extern crate glutin;
 use rusty_gl::buffers::*;
 use rusty_gl::enums::*;
 
-use gl::types::*;
 use glutin::GlContext;
 
 static VERTEX_DATA: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
@@ -35,7 +34,7 @@ fn main() {
     gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
     gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, GLUsage::StaticDraw);
     gl_enable_vertex_attrib_array(0);
-    gl_vertex_attrib_pointer(0, 2, gl::FLOAT, false, 0);
+    gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
 
     //Main loop
     let mut is_running = true;
