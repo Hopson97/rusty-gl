@@ -1,0 +1,9 @@
+[package]
+name = "triangle"
+version = "0.1.0"
+authors = ["Hopson97"]
+
+[dependencies]
+rusty_gl = {path = "../../"}
+gl = "0.6.0"
+glutin = "*"
