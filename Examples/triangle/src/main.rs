@@ -33,7 +33,7 @@ fn main() {
 
     gl_gen_buffers(1, &mut vbo);
     gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
-    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, gl::STATIC_DRAW);
+    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, GLUsage::StaticDraw);
     gl_enable_vertex_attrib_array(0);
     gl_vertex_attrib_pointer(0, 2, gl::FLOAT, false, 0);
 

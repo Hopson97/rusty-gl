@@ -75,13 +75,13 @@ pub fn gl_vertex_attrib_pointer(
 /// Creates and initalizes a buffer object data store
 /// 
 /// More info: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
-pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLenum) {
+pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
     unsafe {
         gl::BufferData(
             target as u32,
             (data.len() * mem::size_of::<T>()) as GLsizeiptr,
             mem::transmute(&data[0]),
-            usage
+            usage as u32
         );
     }
 }
