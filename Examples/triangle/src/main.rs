@@ -2,10 +2,8 @@ extern crate rusty_gl;
 extern crate gl;
 extern crate glutin;
 
-use std::mem;
-use std::ptr;
-
 use rusty_gl::buffers::*;
+use rusty_gl::enums::*;
 
 use gl::types::*;
 use glutin::GlContext;
@@ -34,8 +32,8 @@ fn main() {
     gl_bind_vertex_array(vao);
 
     gl_gen_buffers(1, &mut vbo);
-    gl_bind_buffer(gl::ARRAY_BUFFER, vbo);
-    gl_buffer_data(gl::ARRAY_BUFFER, &VERTEX_DATA, gl::STATIC_DRAW);
+    gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
+    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, gl::STATIC_DRAW);
     gl_enable_vertex_attrib_array(0);
     gl_vertex_attrib_pointer(0, 2, gl::FLOAT, false, 0);
 

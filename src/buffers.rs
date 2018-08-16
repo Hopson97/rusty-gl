@@ -3,6 +3,7 @@ use gl::types::*;
 use std::mem;
 use std::ptr;
 
+use super::enums::*;
 
 /// Generates vertex array objects
 /// 
@@ -34,9 +35,9 @@ pub fn gl_bind_vertex_array(array: GLuint) {
 /// Bind a vertex buffer
 /// 
 /// More info: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
-pub fn gl_bind_buffer(target: GLenum, buffer: GLuint) {
+pub fn gl_bind_buffer(target: GLTarget, buffer: GLuint) {
     unsafe {
-        gl::BindBuffer(target, buffer);
+        gl::BindBuffer(target as u32, buffer);
     }
 }
 
@@ -74,10 +75,10 @@ pub fn gl_vertex_attrib_pointer(
 /// Creates and initalizes a buffer object data store
 /// 
 /// More info: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
-pub fn gl_buffer_data<T>(target: GLenum, data: &[T], usage: GLenum) {
+pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLenum) {
     unsafe {
         gl::BufferData(
-            target,
+            target as u32,
             (data.len() * mem::size_of::<T>()) as GLsizeiptr,
             mem::transmute(&data[0]),
             usage
