@@ -16,11 +16,29 @@ Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, wh
 * Texture 2D
 * Single-tuple struct such as `VAO(GLuint)` to enforce correct OpenGL object type is passed in functions
 
+# Tuple Struct
+
+Current tuple structs:
+
+* `pub struct VBO(GLuint);` for vertex buffer objects
+* `pub struct VAO(GLuint);` for vertex array objects
+* `pub struct GLTexture(GLuint);` for texture objects
+* `pub struct GLShader(GLuint);` for programs/ shader object
+
+These structs have no implemention (assosiated function), they are just there to enforce that the correct OpenGL functions are passed into functions.
+For example:
+
+```rust
+let mut vao = gl_gen_vertex_array();
+gl_bind_buffer(GLTarget::ArrayBuffer, vao);
+```
+
+would not work, as `gl_bind_buffer` expects type `struct VBO(GLuint)`, but vao is of type `VAO(GLuint)`.
+
 # Roadmap
 
-* Safer VAO and VBO by using `struct VBO(GLuint)`. This would prevent passing incorrect OpenGL object types to the wrong functions.
 * Framebuffer objects
-* Uniform shader variables
+* Uniform shader variables functions
 * More OpenGL functions (Right now there is basically only the minimum!)
 
 # Usage

@@ -4,10 +4,10 @@ use rusty_gl::enums::*;
 use rusty_gl::shaders::*;
 use std::io::Read;
 
-use std::fs::File;#
+use std::fs::File;
 
 
-/**
+/*
  * Note: `GLShader` is just `pub struct(GLuint)`. This is to enforce correct type is passed into the functions
  */
 
