@@ -35,3 +35,21 @@ pub fn get_shader_info_log(shader: GLuint, buffer_size: GLsizei, length: &mut GL
         gl::GetShaderInfoLog(shader, buffer_size, length, info_log.as_mut_ptr() as *mut GLchar);
     }
 }
+
+pub fn gl_attach_shader(program: GLuint, shader: GLuint) {
+    unsafe {
+        gl::AttachShader(program, shader);
+    }
+}
+
+pub fn gl_link_program(program: GLuint) {
+    unsafe {
+        gl::LinkProgram(program);
+    }
+}
+
+pub fn gl_use_program(program: GLuint) {
+    unsafe {
+        gl::UseProgram(program);
+    }
+}

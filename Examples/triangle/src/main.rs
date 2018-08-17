@@ -19,7 +19,7 @@ fn main() {
     let ctx_builder = glutin::ContextBuilder::new();
 
     let window = glutin::GlWindow::new(win_builder, ctx_builder, &events_loop).unwrap();
-    gl::GetShaderInfoLog();
+   // gl::GetShaderInfoLog();
     unsafe {
         window.make_current().unwrap();
     }
