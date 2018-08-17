@@ -13,7 +13,7 @@ use super::enums::*;
 /// gl_gen_vertex_arrays(1, &mut vao);
 /// ```
 /// 
-/// More info: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenVertexArrays.xhtml
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenVertexArrays.xhtml
 pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut GLuint) {
     unsafe {
         gl::GenVertexArrays(count, arrays);
@@ -28,7 +28,7 @@ pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut GLuint) {
 /// gl_gen_buffers(1, &mut vbo);
 /// ```
 /// 
-/// More info: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
 pub fn gl_gen_buffers(count: GLsizei, buffers: *mut GLuint) {
     unsafe {
         gl::GenBuffers(count, buffers);
@@ -44,7 +44,7 @@ pub fn gl_gen_buffers(count: GLsizei, buffers: *mut GLuint) {
 /// gl_bind_vertex_array(vao);
 /// ```
 /// 
-/// More info: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBindVertexArray.xhtml
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBindVertexArray.xhtml
 pub fn gl_bind_vertex_array(array: GLuint) {
     unsafe {
         gl::BindVertexArray(array);
@@ -60,7 +60,7 @@ pub fn gl_bind_vertex_array(array: GLuint) {
 /// gl_bind_vertex_array(vao);
 /// ```
 /// 
-/// More info: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
 pub fn gl_bind_buffer(target: GLTarget, buffer: GLuint) {
     unsafe {
         gl::BindBuffer(target as u32, buffer);
@@ -74,7 +74,7 @@ pub fn gl_bind_buffer(target: GLTarget, buffer: GLuint) {
 /// gl_enable_vertex_attrib_array(0);
 /// ```
 /// 
-/// More info: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glEnableVertexAttribArray.xhtml
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glEnableVertexAttribArray.xhtml
 pub fn gl_enable_vertex_attrib_array(index: GLuint) {
     unsafe {
         gl::EnableVertexAttribArray(index);
@@ -88,7 +88,7 @@ pub fn gl_enable_vertex_attrib_array(index: GLuint) {
 /// gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
 /// ```
 /// 
-/// More info: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
 /// TODO that last param in a rusty way (null default for now)
 pub fn gl_vertex_attrib_pointer(
     index: GLuint, 
@@ -117,7 +117,7 @@ pub fn gl_vertex_attrib_pointer(
 /// gl_buffer_data(GLTarget::ArrayBuffer, &vertex_data, GLUsage::StaticDraw);
 /// ```
 /// 
-/// More info: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
 pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
     unsafe {
         gl::BufferData(
