@@ -22,6 +22,12 @@ pub fn gl_bind_texture(target: GLTexTarget, texture: GLuint) {
     }
 }
 
+pub fn gl_delete_textures(count: GLsizei, texture: *mut GLuint) {
+    unsafe {
+        gl::DeleteTextures(count, texture);
+    }
+}
+
 pub fn gl_tex_image_2d(
     target: GLTexTarget,
     level: GLint,
