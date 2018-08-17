@@ -57,6 +57,8 @@ fn main() {
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
         gl_draw_arrays(GLPrimitive::Triangles, 0, 3);
 
+        gl::DrawElementsInstanced();
+
 
         window.swap_buffers().unwrap();
     }

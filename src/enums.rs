@@ -15,7 +15,11 @@ pub enum GLUsage {
 #[repr(u32)]
 #[derive(Clone, Copy)]
 pub enum GLType {
-    Float = gl::FLOAT
+    Float = gl::FLOAT,
+
+    UByte = gl::UNSIGNED_BYTE,
+    UShort = gl::UNSIGNED_SHORT,
+    UInt = gl::UNSIGNED_INT
 }
 
 #[repr(u32)]
@@ -31,3 +35,4 @@ pub enum GLClearMask {
 pub enum GLPrimitive {
     Triangles = gl::TRIANGLES
 }
+pub type GLMode = GLPrimitive;
