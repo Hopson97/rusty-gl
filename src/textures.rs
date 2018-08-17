@@ -12,7 +12,7 @@ pub fn gl_gen_textures(count: GLsizei, texture: *mut GLuint) {
 
 pub fn gl_gen_texture() -> GLuint {
     let mut tex = 0;
-    gl_gen_texture(1, &mut tex);
+    gl_gen_textures(1, &mut tex);
     tex
 }
 

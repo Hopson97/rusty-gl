@@ -41,17 +41,15 @@ fn main() {
     gl::load_with(|s| window.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
-    let mut vao = 0;
-    let mut vbo = 0;
-    let mut tex_vbo = 0;
 
-    //Generate and bind the VAO
-    gl_gen_vertex_arrays(1, &mut vao);
+    //Create a vertex array object and a vertex buffer object
+    let mut vao = gl_gen_vertex_array();
+    let mut vbo = gl_gen_buffer();
+    let mut tex_vbo = gl_gen_buffer();
+
     gl_bind_vertex_array(vao);
 
-    //VERTEX POSITIONS
-    //Generate and bind the VBO
-    gl_gen_buffers(1, &mut vbo);
+    //Vertex positions
     gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
@@ -61,7 +59,6 @@ fn main() {
 
     //TEXTURE
     //Generate and bind the VBO
-    gl_gen_buffers(1, &mut tex_vbo);
     gl_bind_buffer(GLTarget::ArrayBuffer, tex_vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
@@ -70,8 +67,7 @@ fn main() {
     gl_vertex_attrib_pointer(1, 2, GLType::Float, false, 0);
 
     //ebo
-    let mut ebo = 0;
-    gl_gen_buffers(1, &mut ebo);
+    let mut ebo = gl_gen_buffer();;
     gl_bind_buffer(GLTarget::ElementArrayBuffer, ebo);
     gl_buffer_data(GLTarget::ElementArrayBuffer, &INDICES, GLUsage::StaticDraw);
 
@@ -84,8 +80,7 @@ fn main() {
 
     let buffer = image::open("data/texture.png").unwrap();
     let dim = buffer.dimensions();
-    let mut texture = 0;
-    gl_gen_textures(1, &mut texture);
+    let mut texture = gl_gen_texture();
     gl_active_texture(0);
     gl_bind_texture(GLTexTarget::_2D, texture); 
     gl_tex_image_2d(

@@ -56,7 +56,7 @@ pub fn gl_gen_buffers(count: GLsizei, buffers: *mut GLuint) {
 /// ```
 /// let mut vbo = gl_gen_vertex_buffer();
 /// ```
-pub fn gl_gen_vertex_buffer() -> GLuint {
+pub fn gl_gen_buffer() -> GLuint {
     let mut vbo = 0;
     gl_gen_buffers(1, &mut vbo);
     vbo

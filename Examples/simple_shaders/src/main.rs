@@ -50,17 +50,13 @@ fn main() {
     gl::load_with(|s| window.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
-    let mut vao = 0;
-    let mut vbo = 0;
-    let mut colour_vbo = 0;
+    let mut vao = gl_gen_vertex_array();
+    let mut vbo = gl_gen_buffer();
+    let mut colour_vbo = gl_gen_buffer();
 
-    //Generate and bind the VAO
-    gl_gen_vertex_arrays(1, &mut vao);
     gl_bind_vertex_array(vao);
 
-    //VERTEX POSITIONS
-    //Generate and bind the VBO
-    gl_gen_buffers(1, &mut vbo);
+    //Vertex positions
     gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
@@ -69,8 +65,6 @@ fn main() {
     gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
 
     //COLOURS
-    //Generate and bind the VBO
-    gl_gen_buffers(1, &mut colour_vbo);
     gl_bind_buffer(GLTarget::ArrayBuffer, colour_vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
@@ -79,8 +73,7 @@ fn main() {
     gl_vertex_attrib_pointer(1, 3, GLType::Float, false, 0);
 
     //ebo
-    let mut ebo = 0;
-    gl_gen_buffers(1, &mut ebo);
+    let mut ebo = gl_gen_buffer();
     gl_bind_buffer(GLTarget::ElementArrayBuffer, ebo);
     gl_buffer_data(GLTarget::ElementArrayBuffer, &INDICES, GLUsage::StaticDraw);
 

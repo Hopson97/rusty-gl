@@ -30,15 +30,13 @@ fn main() {
     gl::load_with(|s| window.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
-    let mut vao = 0;
-    let mut vbo = 0;
+    let mut vao = gl_gen_vertex_array();;
+    let mut vbo = gl_gen_buffer();
 
     //Generate and bind the VAO
-    gl_gen_vertex_arrays(1, &mut vao);
     gl_bind_vertex_array(vao);
 
     //Generate and bind the VBO
-    gl_gen_buffers(1, &mut vbo);
     gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
@@ -61,7 +59,7 @@ fn main() {
         });
 
         //Draw stuff
-        gl_clear_color(0.5, 0.5, 0.2, 1.0);
+        gl_clear_color(0.5, 0.5, 0.8, 1.0);
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
         gl_draw_arrays(GLPrimitive::Triangles, 0, 3);
 
