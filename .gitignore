@@ -8,3 +8,6 @@ Examples/triangle/Cargo.lock
 
 Examples/simple_shaders/target/
 Examples/simple_shaders/Cargo.lock
+
+Examples/texture/target/
+Examples/texture/Cargo.lock
