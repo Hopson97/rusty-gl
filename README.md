@@ -8,14 +8,19 @@ Crate: https://crates.io/crates/rusty_gl
 
 Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, while still allowing the control you have with classic OpenGL code.
 
-Wrapper over:
+# Current features
 
 * Vertex buffer objects
 * Vertex array objects
 * Shaders
 * Texture 2D
 
-More to come eventually
+# Roadmap
+
+* Safer VAO and VBO by using `struct VBO(GLuint)`. This would prevent passing incorrect OpenGL object types to the wrong functions.
+* Framebuffer objects
+* Uniform shader variables
+* More OpenGL functions (Right now there is basically only the minimum!)
 
 # Usage
 ```toml

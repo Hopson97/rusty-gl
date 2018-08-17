@@ -5,6 +5,12 @@ use std::ptr;
 
 use super::enums::*;
 
+#[derive(Clone, Copy)]
+pub struct VAO(GLuint);
+
+#[derive(Clone, Copy)]
+pub struct VBO(GLuint);
+
 /// Generates vertex array objects
 ///
 /// # Examples
@@ -14,9 +20,9 @@ use super::enums::*;
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenVertexArrays.xhtml
-pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut GLuint) {
+pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
     unsafe {
-        gl::GenVertexArrays(count, arrays);
+        gl::GenVertexArrays(count, &mut (*arrays).0);
     }
 }
 
@@ -28,8 +34,8 @@ pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut GLuint) {
 /// ```
 /// let mut vao = gl_gen_vertex_array();
 /// ```
-pub fn gl_gen_vertex_array() -> GLuint {
-    let mut vao = 0;
+pub fn gl_gen_vertex_array() -> VAO {
+    let mut vao = VAO(0);
     gl_gen_vertex_arrays(1, &mut vao);
     vao
 }
@@ -43,9 +49,9 @@ pub fn gl_gen_vertex_array() -> GLuint {
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
-pub fn gl_gen_buffers(count: GLsizei, buffers: *mut GLuint) {
+pub fn gl_gen_buffers(count: GLsizei, buffers: *mut VBO) {
     unsafe {
-        gl::GenBuffers(count, buffers);
+        gl::GenBuffers(count, &mut (*buffers).0);
     }
 }
 
@@ -56,8 +62,8 @@ pub fn gl_gen_buffers(count: GLsizei, buffers: *mut GLuint) {
 /// ```
 /// let mut vbo = gl_gen_vertex_buffer();
 /// ```
-pub fn gl_gen_buffer() -> GLuint {
-    let mut vbo = 0;
+pub fn gl_gen_buffer() -> VBO {
+    let mut vbo = VBO(0);
     gl_gen_buffers(1, &mut vbo);
     vbo
 }
@@ -72,9 +78,9 @@ pub fn gl_gen_buffer() -> GLuint {
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBindVertexArray.xhtml
-pub fn gl_bind_vertex_array(array: GLuint) {
+pub fn gl_bind_vertex_array(array: VAO) {
     unsafe {
-        gl::BindVertexArray(array);
+        gl::BindVertexArray(array.0);
     }
 }
 
@@ -88,9 +94,9 @@ pub fn gl_bind_vertex_array(array: GLuint) {
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
-pub fn gl_bind_buffer(target: GLTarget, buffer: GLuint) {
+pub fn gl_bind_buffer(target: GLTarget, buffer: VBO) {
     unsafe {
-        gl::BindBuffer(target as u32, buffer);
+        gl::BindBuffer(target as u32, buffer.0);
     }
 }
 
@@ -157,14 +163,14 @@ pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
     }
 }
 
-pub fn gl_delete_buffers(count: GLsizei, buffers: *mut GLuint) {
+pub fn gl_delete_buffers(count: GLsizei, buffers: *mut VBO) {
     unsafe {
-        gl::DeleteBuffers(count, buffers);
+        gl::DeleteBuffers(count, &mut (*buffers).0);
     }
 }
 
-pub fn gl_delete_vertex_arrays(count: GLsizei, arrays: *mut GLuint) {
+pub fn gl_delete_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
     unsafe {
-        gl::DeleteVertexArrays(count, arrays);
+        gl::DeleteVertexArrays(count, &mut (*arrays).0);
     }
 }
