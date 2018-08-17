@@ -1,5 +1,7 @@
 # Rusty GL
 
+Note: This is a work in progress.
+
 ## Summary
 
 Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, while still allowing the control you have with classic OpenGL code.
