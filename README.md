@@ -25,7 +25,7 @@ Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, wh
 # Usage
 ```toml
 [dependancies]
-rusty_gl = "0.1.0"
+rusty_gl = "0.1.4"
 gl = "0.6.0"
 ```
 
