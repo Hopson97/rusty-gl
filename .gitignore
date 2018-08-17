@@ -5,3 +5,7 @@ Cargo.lock
 #Examples
 Examples/triangle/target/
 Examples/triangle/Cargo.lock
+
+#Examples
+Examples/simple_shaders/target/
+Examples/simple_shaders/Cargo.lock
