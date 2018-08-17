@@ -4,7 +4,7 @@
 //!    1. Make OpenGL in Rust easier to use
 //!
 //!         This has been done by hiding weird (and unsafe!) casts from Rust code to the
-//!         C interface, as well as using rust types over std::os::raw and std::ffi types. For example, 
+//!         C interface, as well as using rust types over std::os::raw and std::ffi types. For example,
 //!         some functions take in &str rather than std::ffi::CString.
 //!     
 //!    2. Make OpenGL in Rust safer to use

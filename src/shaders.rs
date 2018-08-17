@@ -2,25 +2,26 @@ use super::enums::*;
 
 use gl;
 use gl::types::*;
-use std::ptr;
 use std::ffi::CString;
+use std::ptr;
 
 pub fn gl_create_program() -> GLuint {
-    unsafe {
-        gl::CreateProgram()
-    }
+    unsafe { gl::CreateProgram() }
 }
 
 pub fn gl_create_shader(type_: GLShaderType) -> GLuint {
-    unsafe {
-        gl::CreateShader(type_ as GLenum)
-    }
+    unsafe { gl::CreateShader(type_ as GLenum) }
 }
 
 /// TODO: MISSING TWO PARAMS (to do with count)
 pub fn gl_shader_source(shader: GLuint, source: &str) {
     unsafe {
-        gl::ShaderSource(shader, 1, &CString::new(source).unwrap().as_ptr(), ptr::null());
+        gl::ShaderSource(
+            shader,
+            1,
+            &CString::new(source).unwrap().as_ptr(),
+            ptr::null(),
+        );
     }
 }
 
@@ -36,9 +37,19 @@ pub fn gl_get_shader_iv(shader: GLuint, parameter: GLShaderInfoParam, status: &m
     }
 }
 
-pub fn gl_get_shader_info_log(shader: GLuint, buffer_size: GLsizei, length: &mut GLsizei, info_log: &mut Vec<GLchar>) {
+pub fn gl_get_shader_info_log(
+    shader: GLuint,
+    buffer_size: GLsizei,
+    length: &mut GLsizei,
+    info_log: &mut Vec<GLchar>,
+) {
     unsafe {
-        gl::GetShaderInfoLog(shader, buffer_size, length, info_log.as_mut_ptr() as *mut GLchar);
+        gl::GetShaderInfoLog(
+            shader,
+            buffer_size,
+            length,
+            info_log.as_mut_ptr() as *mut GLchar,
+        );
     }
 }
 
@@ -59,8 +70,6 @@ pub fn gl_use_program(program: GLuint) {
         gl::UseProgram(program);
     }
 }
-
-
 
 pub fn gl_delete_program(program: GLuint) {
     unsafe {

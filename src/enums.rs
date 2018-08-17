@@ -4,7 +4,7 @@ use gl;
 #[derive(Clone, Copy)]
 pub enum GLTarget {
     ArrayBuffer = gl::ARRAY_BUFFER,
-    ElementArrayBuffer = gl::ELEMENT_ARRAY_BUFFER
+    ElementArrayBuffer = gl::ELEMENT_ARRAY_BUFFER,
 }
 
 #[repr(u32)]
@@ -42,9 +42,8 @@ pub type GLMode = GLPrimitive;
 #[derive(Clone, Copy)]
 pub enum GLShaderType {
     Vertex = gl::VERTEX_SHADER,
-    Fragment = gl::FRAGMENT_SHADER
+    Fragment = gl::FRAGMENT_SHADER,
 }
-
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
@@ -53,5 +52,5 @@ pub enum GLShaderInfoParam {
     DeleteStatus = gl::DELETE_STATUS,
     CompileStatus = gl::COMPILE_STATUS,
     InfoLogLength = gl::INFO_LOG_LENGTH,
-    ShaderSourceLength = gl::SHADER_SOURCE_LENGTH
+    ShaderSourceLength = gl::SHADER_SOURCE_LENGTH,
 }

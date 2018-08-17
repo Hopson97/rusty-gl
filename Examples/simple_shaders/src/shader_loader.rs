@@ -2,7 +2,6 @@ use gl;
 use gl::types::*;
 use rusty_gl::shaders::*;
 use rusty_gl::enums::*;
-use std::str;
 use std::io::Read;
 
 use std::fs::File;
