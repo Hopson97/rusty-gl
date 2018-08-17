@@ -4,14 +4,17 @@ use gl;
 use gl::types::*;
 use std::os::raw::c_void;
 
-pub fn gl_gen_textures(count: GLsizei, texture: *mut GLuint) {
+#[derive(Clone, Copy)]
+pub struct GLTexture(GLuint);
+
+pub fn gl_gen_textures(count: GLsizei, texture: *mut GLTexture) {
     unsafe {
-        gl::GenTextures(count, texture);
+        gl::GenTextures(count, &mut (*texture).0);
     }
 }
 
-pub fn gl_gen_texture() -> GLuint {
-    let mut tex = 0;
+pub fn gl_gen_texture() -> GLTexture {
+    let mut tex = GLTexture(0);
     gl_gen_textures(1, &mut tex);
     tex
 }
@@ -22,15 +25,15 @@ pub fn gl_active_texture(texture: GLuint) {
     }
 }
 
-pub fn gl_bind_texture(target: GLTexTarget, texture: GLuint) {
+pub fn gl_bind_texture(target: GLTexTarget, texture: GLTexture) {
     unsafe {
-        gl::BindTexture(target as GLenum, texture);
+        gl::BindTexture(target as GLenum, texture.0);
     }
 }
 
-pub fn gl_delete_textures(count: GLsizei, texture: *mut GLuint) {
+pub fn gl_delete_textures(count: GLsizei, texture: *mut GLTexture) {
     unsafe {
-        gl::DeleteTextures(count, texture);
+        gl::DeleteTextures(count, &mut (*texture).0);
     }
 }
 
