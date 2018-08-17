@@ -129,3 +129,16 @@ pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
         );
     }
 }
+
+
+pub fn gl_delete_buffers(count: GLsizei, buffers: *mut GLuint) {
+    unsafe {
+        gl::DeleteBuffers(count, buffers);
+    }
+}
+
+pub fn gl_delete_vertex_arrays(count: GLsizei, arrays: *mut GLuint) {
+    unsafe {
+        gl::DeleteVertexArrays(count, arrays);
+    }
+}

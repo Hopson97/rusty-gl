@@ -53,3 +53,17 @@ pub fn gl_use_program(program: GLuint) {
         gl::UseProgram(program);
     }
 }
+
+
+
+pub fn gl_delete_program(program: GLuint) {
+    unsafe {
+        gl::DeleteProgram(program);
+    }
+}
+
+pub fn gl_delete_shader(shader: GLuint) {
+    unsafe {
+        gl::DeleteShader(shader);
+    }
+}
