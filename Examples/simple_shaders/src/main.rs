@@ -2,9 +2,14 @@ extern crate rusty_gl;
 extern crate gl;
 extern crate glutin;
 
+mod shader_loader;
+
+use shader_loader::load_shader;
+
 use rusty_gl::buffers::*;
 use rusty_gl::enums::*;
 use rusty_gl::drawing::*;
+use rusty_gl::shaders::*;
 
 use gl::types::*;
 
@@ -43,6 +48,10 @@ fn main() {
     gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, GLUsage::StaticDraw);
     gl_enable_vertex_attrib_array(0);
     gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+
+    //Shaders!
+    let shader_program = load_shader(String::from("data/shader.vert"), String::from("data/shader.frag"));
+    gl_use_program(shader_program);
 
     //Main loop
     let mut is_running = true;

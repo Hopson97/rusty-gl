@@ -30,7 +30,7 @@ pub fn gl_get_shader_iv(shader: GLuint, parameter: GLShaderInfoParam, status: &m
     }
 }
 
-pub fn get_shader_info_log(shader: GLuint, buffer_size: GLsizei, length: &mut GLsizei, info_log: &mut Vec<GLchar>) {
+pub fn gl_get_shader_info_log(shader: GLuint, buffer_size: GLsizei, length: &mut GLsizei, info_log: &mut Vec<GLchar>) {
     unsafe {
         gl::GetShaderInfoLog(shader, buffer_size, length, info_log.as_mut_ptr() as *mut GLchar);
     }
