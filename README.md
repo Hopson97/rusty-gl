@@ -2,6 +2,8 @@
 
 Note: This is a work in progress.
 
+Crate: https://crates.io/crates/rusty_gl
+
 ## Summary
 
 Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, while still allowing the control you have with classic OpenGL code.
