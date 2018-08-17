@@ -3,13 +3,13 @@ use gl;
 #[repr(u32)]
 #[derive(Clone, Copy)]
 pub enum GLTarget {
-    ArrayBuffer = gl::ARRAY_BUFFER
+    ArrayBuffer = gl::ARRAY_BUFFER,
 }
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
 pub enum GLUsage {
-    StaticDraw = gl::STATIC_DRAW
+    StaticDraw = gl::STATIC_DRAW,
 }
 
 #[repr(u32)]
@@ -19,7 +19,7 @@ pub enum GLType {
 
     UByte = gl::UNSIGNED_BYTE,
     UShort = gl::UNSIGNED_SHORT,
-    UInt = gl::UNSIGNED_INT
+    UInt = gl::UNSIGNED_INT,
 }
 
 #[repr(u32)]
@@ -33,6 +33,6 @@ pub enum GLClearMask {
 #[repr(u32)]
 #[derive(Clone, Copy)]
 pub enum GLPrimitive {
-    Triangles = gl::TRIANGLES
+    Triangles = gl::TRIANGLES,
 }
 pub type GLMode = GLPrimitive;
