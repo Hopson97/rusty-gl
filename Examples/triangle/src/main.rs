@@ -4,6 +4,9 @@ extern crate glutin;
 
 use rusty_gl::buffers::*;
 use rusty_gl::enums::*;
+use rusty_gl::drawing::*;
+
+use gl::types::*;
 
 use glutin::GlContext;
 
@@ -50,14 +53,10 @@ fn main() {
             }
         });
 
-        //Render
-        unsafe {
-            // Clear the screen to black
-            gl::ClearColor(0.3, 0.3, 0.3, 1.0);
-            gl::Clear(gl::COLOR_BUFFER_BIT);
-            // Draw a triangle from the 3 vertices
-            gl::DrawArrays(gl::TRIANGLES, 0, 3);
-        }
+        gl_clear_color(0.5, 0.5, 0.2, 1.0);
+        unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
+        gl_draw_arrays(GLPrimitive::Triangles, 0, 3);
+
 
         window.swap_buffers().unwrap();
     }

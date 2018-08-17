@@ -1,5 +1,4 @@
 use gl;
-use gl::types::*;
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
@@ -17,4 +16,18 @@ pub enum GLUsage {
 #[derive(Clone, Copy)]
 pub enum GLType {
     Float = gl::FLOAT
+}
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLClearMask {
+    ColorBufferBit = gl::COLOR_BUFFER_BIT,
+    DepthBufferBit = gl::DEPTH_BUFFER_BIT,
+    StencilBufferBit = gl::STENCIL_BUFFER_BIT,
+}
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLPrimitive {
+    Triangles = gl::TRIANGLES
 }
