@@ -21,7 +21,10 @@ More to come eventually
 ```toml
 [dependancies]
 rusty_gl = "0.1.0"
+gl = "0.6.0"
 ```
+
+The `gl-rs` create (`gl`) is still needed for certain things such as window proc address and types (eg `GLuint`, `GLfloat` etc)
 
 ## Examples
 
