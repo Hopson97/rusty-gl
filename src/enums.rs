@@ -36,3 +36,21 @@ pub enum GLPrimitive {
     Triangles = gl::TRIANGLES,
 }
 pub type GLMode = GLPrimitive;
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLShaderType {
+    Vertex = gl::VERTEX_SHADER,
+    Fragment = gl::FRAGMENT_SHADER
+}
+
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLShaderInfoParam {
+    ShaderType = gl::SHADER_TYPE,
+    DeleteStatus = gl::DELETE_STATUS,
+    CompileStatus = gl::COMPILE_STATUS,
+    InfoLogLength = gl::INFO_LOG_LENGTH,
+    ShaderSourceLength = gl::SHADER_SOURCE_LENGTH
+}
