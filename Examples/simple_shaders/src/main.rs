@@ -22,6 +22,13 @@ static VERTEX_POS: [GLfloat; 8] = [
     0.5, -0.5
 ];
 
+static COLOURS: [GLfloat; 12] = [
+    1.0, 0.0, 0.0, 
+    0.0, 1.0, 0.0,
+    0.0, 0.0, 1.0,
+    1.0, 1.0, 1.0,
+];
+
 static INDICES: [GLuint; 6] = [
     0, 1, 2,
     2, 3, 0
@@ -45,11 +52,13 @@ fn main() {
     //Create a vertex array object and a vertex buffer object
     let mut vao = 0;
     let mut vbo = 0;
+    let mut colour_vbo = 0;
 
     //Generate and bind the VAO
     gl_gen_vertex_arrays(1, &mut vao);
     gl_bind_vertex_array(vao);
 
+    //VERTEX POSITIONS
     //Generate and bind the VBO
     gl_gen_buffers(1, &mut vbo);
     gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
@@ -58,6 +67,16 @@ fn main() {
     gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_POS, GLUsage::StaticDraw);
     gl_enable_vertex_attrib_array(0);
     gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+
+    //COLOURS
+    //Generate and bind the VBO
+    gl_gen_buffers(1, &mut colour_vbo);
+    gl_bind_buffer(GLTarget::ArrayBuffer, colour_vbo);
+
+    //Buffer the vertex data and tell OpenGL the structure
+    gl_buffer_data(GLTarget::ArrayBuffer, &COLOURS, GLUsage::StaticDraw);
+    gl_enable_vertex_attrib_array(1);
+    gl_vertex_attrib_pointer(1, 3, GLType::Float, false, 0);
 
     //ebo
     let mut ebo = 0;

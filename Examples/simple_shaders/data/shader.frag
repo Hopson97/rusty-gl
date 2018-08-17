@@ -2,6 +2,8 @@
 
 out vec4 outColour;
 
+in vec3 passVertexColour;
+
 void main() {
-    outColour = vec4(1.0, 0.5, 0.5, 1.0);
+    outColour = vec4(passVertexColour, 1.0);
 }
