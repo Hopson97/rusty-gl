@@ -16,7 +16,12 @@ pub fn load_shader(vertex_shader: String, fragment_shader: String) -> GLuint {
     gl_attach_shader(program, v_shader);
     gl_attach_shader(program, f_shader);
     gl_link_program(program);
+    
+    //Program linked, shaders no longer needed
+    gl_delete_shader(v_shader);
+    gl_delete_shader(f_shader);
 
+    //Program object
     program
 }
 

@@ -68,4 +68,8 @@ fn main() {
 
         window.swap_buffers().unwrap();
     }
+
+    //Cleanup
+    gl_delete_buffers(1, &mut vbo);
+    gl_delete_vertex_arrays(1, &mut vao);
 }

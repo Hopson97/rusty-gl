@@ -109,4 +109,11 @@ fn main() {
 
         window.swap_buffers().unwrap();
     }
+
+    //Cleanup
+    gl_delete_buffers(1, &mut ebo);
+    gl_delete_buffers(1, &mut vbo);
+    gl_delete_vertex_arrays(1, &mut vao);
+
+    gl_delete_program(shader_program);
 }
