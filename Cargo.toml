@@ -2,8 +2,11 @@
 name = "rusty_gl"
 license = "MIT OR Apache-2.0"
 description = "Safe thin wrapper for OpenGL using the gl-rs crate"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Matthew Hopson"]
+repository = "https://github.com/Hopson97/rusty-gl"
+readme = "README.md"
+documentation = "https://docs.rs/rusty_gl/0.1.0/rusty_gl/"
 
 [dependencies]
 gl = "0.6.0"
