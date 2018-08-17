@@ -1,47 +1,30 @@
-extern crate rusty_gl;
 extern crate gl;
 extern crate glutin;
 extern crate image;
+extern crate rusty_gl;
 
 mod shader_loader;
 
 use shader_loader::load_shader;
 
 use rusty_gl::buffers::*;
-use rusty_gl::enums::*;
 use rusty_gl::drawing::*;
+use rusty_gl::enums::*;
 use rusty_gl::shaders::*;
+use rusty_gl::textures::*;
 
 use gl::types::*;
 
 use glutin::GlContext;
-use image::{ImageBuffer, GenericImage};
+use image::{GenericImage, ImageBuffer};
 
-static VERTEX_POS: [GLfloat; 8] = [
-    -0.5, -0.5, 
-    -0.5, 0.5, 
-    0.5, 0.5, 
-    0.5, -0.5
-];
+static VERTEX_POS: [GLfloat; 8] = [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5];
 
-static COLOURS: [GLfloat; 12] = [
-    1.0, 0.0, 0.0, 
-    0.0, 1.0, 0.0,
-    0.0, 0.0, 1.0,
-    1.0, 1.0, 1.0,
-];
+static COLOURS: [GLfloat; 12] = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0];
 
-static INDICES: [GLuint; 6] = [
-    0, 1, 2,
-    2, 3, 0
-];
+static INDICES: [GLuint; 6] = [0, 1, 2, 2, 3, 0];
 
-static TEX_COORDS: [GLfloat; 8] = [
-    0.0, 0.0,
-    0.0, 1.0,
-    1.0, 1.0,
-    1.0, 0.0
-];
+static TEX_COORDS: [GLfloat; 8] = [0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0];
 
 fn main() {
     //Set up the window
@@ -50,7 +33,7 @@ fn main() {
     let ctx_builder = glutin::ContextBuilder::new();
 
     let window = glutin::GlWindow::new(win_builder, ctx_builder, &events_loop).unwrap();
-   // gl::GetShaderInfoLog();
+    // gl::GetShaderInfoLog();
     unsafe {
         window.make_current().unwrap();
     }
@@ -105,45 +88,49 @@ fn main() {
     gl_buffer_data(GLTarget::ElementArrayBuffer, &INDICES, GLUsage::StaticDraw);
 
     //Shaders!
-    let shader_program = load_shader(String::from("data/shader.vert"), String::from("data/shader.frag"));
+    let shader_program = load_shader(
+        String::from("data/shader.vert"),
+        String::from("data/shader.frag"),
+    );
     gl_use_program(shader_program);
 
-    
+    let buffer = image::open("data/texture.png").unwrap();
+    let dim = buffer.dimensions();
     let mut texture = 0;
-    unsafe {
-        let buffer = image::open("data/texture.png").unwrap();
-        let dim = buffer.dimensions();
+    gl_gen_textures(1, &mut texture);
+    gl_active_texture(0);
+    gl_bind_texture(GLTexTarget::_2D, texture); 
+    gl_tex_image_2d(
+        GLTexTarget::_2D,
+        0,
+        GLTexFormat::RGB,
+        dim.0 as i32,
+        dim.1 as i32,
+        0,
+        GLTexFormat::RGB,
+        &buffer.raw_pixels(),
+    );
 
-
-
-        gl::GenTextures(1, &mut texture);
-        gl::ActiveTexture(gl::TEXTURE0);
-        gl::BindTexture(gl::TEXTURE_2D, texture);
-
-        gl::TexImage2D(gl::TEXTURE_2D, 0, gl::RGB as i32, dim.0 as i32, dim.1 as i32, 0, gl::RGB, gl::UNSIGNED_BYTE, buffer.raw_pixels().as_ptr() as *const std::os::raw::c_void);
-
-        gl::GenerateMipmap(gl::TEXTURE_2D);
-        gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::NEAREST as i32);
-        gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::NEAREST as i32);
-    }
+    gl_tex_parameteri(GLTexTarget::_2D, GLTexParamName::MinFilter, GLTexParam::Nearest);
+    gl_tex_parameteri(GLTexTarget::_2D, GLTexParamName::MagFilter, GLTexParam::Nearest);
 
     //Main loop
     let mut is_running = true;
     while is_running {
         //Poll window events
-        events_loop.poll_events(|event| {
-            match event {
-                glutin::Event::WindowEvent { event, .. } => match event {
-                    glutin::WindowEvent::CloseRequested => is_running = false,
-                    _ => (),
-                },
-                _ => ()
-            }
+        events_loop.poll_events(|event| match event {
+            glutin::Event::WindowEvent { event, .. } => match event {
+                glutin::WindowEvent::CloseRequested => is_running = false,
+                _ => (),
+            },
+            _ => (),
         });
 
         //Draw stuff
         gl_clear_color(0.5, 0.2, 0.8, 1.0);
-        unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
+        unsafe {
+            gl::Clear(gl::COLOR_BUFFER_BIT);
+        }
         gl_draw_elements(GLPrimitive::Triangles, 6, GLType::UInt);
 
         window.swap_buffers().unwrap();

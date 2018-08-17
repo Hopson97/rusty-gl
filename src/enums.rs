@@ -54,3 +54,37 @@ pub enum GLShaderInfoParam {
     InfoLogLength = gl::INFO_LOG_LENGTH,
     ShaderSourceLength = gl::SHADER_SOURCE_LENGTH,
 }
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLTexTarget {
+    _2D = gl::TEXTURE_2D,
+    CubeMap = gl::TEXTURE_CUBE_MAP
+}
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLTexFormat {
+    RGB = gl::RGB,
+    RGBA = gl::RGBA,
+}
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLTexParamName {
+    MinFilter = gl::TEXTURE_MIN_FILTER,
+    MagFilter = gl::TEXTURE_MAG_FILTER,
+    WrapS = gl::TEXTURE_WRAP_S,
+    WrapT = gl::TEXTURE_WRAP_T  
+}
+
+#[repr(u32)]
+#[derive(Clone, Copy)]
+pub enum GLTexParam {
+    Nearest = gl::NEAREST,
+    Linear = gl::LINEAR,
+    NearestMipmapNearest = gl::NEAREST_MIPMAP_NEAREST,
+    LinearMipmapLinear = gl::LINEAR_MIPMAP_LINEAR,
+    NearestMipmapLinear = gl::NEAREST_MIPMAP_LINEAR,
+    LinearMipmapNearest = gl::LINEAR_MIPMAP_NEAREST
+}

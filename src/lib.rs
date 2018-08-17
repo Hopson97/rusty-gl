@@ -27,3 +27,4 @@ pub mod buffers;
 pub mod drawing;
 pub mod enums;
 pub mod shaders;
+pub mod textures;
