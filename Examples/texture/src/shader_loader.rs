@@ -4,9 +4,14 @@ use rusty_gl::enums::*;
 use rusty_gl::shaders::*;
 use std::io::Read;
 
-use std::fs::File;
+use std::fs::File;#
 
-pub fn load_shader(vertex_shader: String, fragment_shader: String) -> GLuint {
+
+/**
+ * Note: `GLShader` is just `pub struct(GLuint)`. This is to enforce correct type is passed into the functions
+ */
+
+pub fn load_shader(vertex_shader: String, fragment_shader: String) -> GLShader {
     let vertex_source = get_source(vertex_shader);
     let fragment_source = get_source(fragment_shader);
 
@@ -34,7 +39,7 @@ fn get_source(source_file: String) -> String {
     f_cont
 }
 
-fn compile_shader(source: String, ty: GLShaderType) -> GLuint {
+fn compile_shader(source: String, ty: GLShaderType) -> GLShader {
     let shader = gl_create_shader(ty);
     gl_shader_source(shader, &source);
     gl_compile_shader(shader);

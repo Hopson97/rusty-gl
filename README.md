@@ -14,6 +14,7 @@ Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, wh
 * Vertex array objects
 * Shaders
 * Texture 2D
+* Single-tuple struct such as `VAO(GLuint)` to enforce correct OpenGL object type is passed in functions
 
 # Roadmap
 
@@ -25,7 +26,7 @@ Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, wh
 # Usage
 ```toml
 [dependancies]
-rusty_gl = "0.1.4"
+rusty_gl = "0.1.5"
 gl = "0.6.0"
 ```
 
