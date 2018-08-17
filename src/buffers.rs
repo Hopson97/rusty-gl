@@ -20,6 +20,20 @@ pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut GLuint) {
     }
 }
 
+
+/// Generates a single VAO
+/// No need to create the VAO seperatly!
+/// 
+/// # Examples
+/// ```
+/// let mut vao = gl_gen_vertex_array();
+/// ```
+pub fn gl_gen_vertex_array() -> GLuint {
+    let mut vao = 0;
+    gl_gen_vertex_arrays(1, &mut vao);
+    vao
+}
+
 /// Generates some buffer objects
 ///
 /// # Examples
@@ -33,6 +47,19 @@ pub fn gl_gen_buffers(count: GLsizei, buffers: *mut GLuint) {
     unsafe {
         gl::GenBuffers(count, buffers);
     }
+}
+
+/// Generates a single VBO
+/// No need to create the VBO seperatly!
+/// 
+/// # Examples
+/// ```
+/// let mut vbo = gl_gen_vertex_buffer();
+/// ```
+pub fn gl_gen_vertex_buffer() -> GLuint {
+    let mut vbo = 0;
+    gl_gen_buffers(1, &mut vbo);
+    vbo
 }
 
 /// Bind a vertex array object

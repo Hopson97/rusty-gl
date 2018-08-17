@@ -10,6 +10,12 @@ pub fn gl_gen_textures(count: GLsizei, texture: *mut GLuint) {
     }
 }
 
+pub fn gl_gen_texture() -> GLuint {
+    let mut tex = 0;
+    gl_gen_texture(1, &mut tex);
+    tex
+}
+
 pub fn gl_active_texture(texture: GLuint) {
     unsafe {
         gl::ActiveTexture(gl::TEXTURE0 + texture);
