@@ -4,6 +4,7 @@ use gl;
 #[derive(Clone, Copy)]
 pub enum GLTarget {
     ArrayBuffer = gl::ARRAY_BUFFER,
+    ElementArrayBuffer = gl::ELEMENT_ARRAY_BUFFER
 }
 
 #[repr(u32)]

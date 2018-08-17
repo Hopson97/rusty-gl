@@ -15,7 +15,17 @@ use gl::types::*;
 
 use glutin::GlContext;
 
-static VERTEX_DATA: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
+static VERTEX_POS: [GLfloat; 8] = [
+    -0.5, -0.5, 
+    -0.5, 0.5, 
+    0.5, 0.5, 
+    0.5, -0.5
+];
+
+static INDICES: [GLuint; 6] = [
+    0, 1, 2,
+    2, 3, 0
+];
 
 fn main() {
     //Set up the window
@@ -45,9 +55,15 @@ fn main() {
     gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, GLUsage::StaticDraw);
+    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_POS, GLUsage::StaticDraw);
     gl_enable_vertex_attrib_array(0);
     gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+
+    //ebo
+    let mut ebo = 0;
+    gl_gen_buffers(1, &mut ebo);
+    gl_bind_buffer(GLTarget::ElementArrayBuffer, ebo);
+    gl_buffer_data(GLTarget::ElementArrayBuffer, &INDICES, GLUsage::StaticDraw);
 
     //Shaders!
     let shader_program = load_shader(String::from("data/shader.vert"), String::from("data/shader.frag"));
@@ -70,8 +86,7 @@ fn main() {
         //Draw stuff
         gl_clear_color(0.5, 0.5, 0.2, 1.0);
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
-        gl_draw_arrays(GLPrimitive::Triangles, 0, 3);
-
+        gl_draw_elements(GLPrimitive::Triangles, 6, GLType::UInt);
 
         window.swap_buffers().unwrap();
     }

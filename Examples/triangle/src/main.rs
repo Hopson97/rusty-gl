@@ -10,6 +10,8 @@ use gl::types::*;
 
 use glutin::GlContext;
 
+
+
 static VERTEX_DATA: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
 
 fn main() {

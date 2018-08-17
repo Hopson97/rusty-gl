@@ -5,6 +5,12 @@ use gl::types::*;
 use std::ptr;
 use std::ffi::CString;
 
+pub fn gl_create_program() -> GLuint {
+    unsafe {
+        gl::CreateProgram()
+    }
+}
+
 pub fn gl_create_shader(type_: GLShaderType) -> GLuint {
     unsafe {
         gl::CreateShader(type_ as GLenum)

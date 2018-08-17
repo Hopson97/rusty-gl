@@ -13,10 +13,7 @@ pub fn load_shader(vertex_shader: String, fragment_shader: String) -> GLuint {
 
     let v_shader = compile_shader(vertex_source, GLShaderType::Vertex);
     let f_shader = compile_shader(fragment_source, GLShaderType::Fragment);
-    let program;
-    unsafe{
-        program = gl::CreateProgram();
-    }
+    let program = gl_create_program();
     gl_attach_shader(program, v_shader);
     gl_attach_shader(program, f_shader);
     gl_link_program(program);
