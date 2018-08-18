@@ -127,3 +127,51 @@ pub fn gl_uniform4f(location: GLUniformLocation, v0: GLfloat, v1: GLfloat, v2: G
         gl::Uniform4f(location.0, v0, v1, v2, v3);
     }
 }
+
+pub fn gl_uniform1i(location: GLUniformLocation, v0: GLint) {
+    unsafe {
+        gl::Uniform1i(location.0, v0);
+    }
+}
+
+pub fn gl_uniform2i(location: GLUniformLocation, v0: GLint, v1: GLint) {
+    unsafe {
+        gl::Uniform2i(location.0, v0, v1);
+    }
+}
+
+pub fn gl_uniform3i(location: GLUniformLocation, v0: GLint, v1: GLint, v2: GLint) {
+    unsafe {
+        gl::Uniform3i(location.0, v0, v1, v2);
+    }
+}
+
+pub fn gl_uniform4i(location: GLUniformLocation, v0: GLint, v1: GLint, v2: GLint, v3: GLint) {
+    unsafe {
+        gl::Uniform4i(location.0, v0, v1, v2, v3);
+    }
+}
+
+pub fn gl_uniform1ui(location: GLUniformLocation, v0: GLuint) {
+    unsafe {
+        gl::Uniform1u(location.0, v0);
+    }
+}
+
+pub fn gl_uniform2ui(location: GLUniformLocation, v0: GLuint, v1: GLuint) {
+    unsafe {
+        gl::Uniform2u(location.0, v0, v1);
+    }
+}
+
+pub fn gl_uniform3ui(location: GLUniformLocation, v0: GLuint, v1: GLuint, v2: GLuint) {
+    unsafe {
+        gl::Uniform3i(location.0, v0, v1, v2);
+    }
+}
+
+pub fn gl_uniform4ui(location: GLUniformLocation, v0: GLuint, v1: GLuint, v2: GLuint, v3: GLuint) {
+    unsafe {
+        gl::Uniform4i(location.0, v0, v1, v2, v3);
+    }
+}
