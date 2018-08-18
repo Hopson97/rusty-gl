@@ -2,7 +2,7 @@
 
 Note: This is a work in progress.
 
-Crate: https://crates.io/crates/rusty_gl
+Crate: https://crates.io/crates/rgl
 
 ## Summary
 
