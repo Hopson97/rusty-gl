@@ -1,7 +1,6 @@
 use gl;
 use gl::types::*;
-use rusty_gl::enums::*;
-use rusty_gl::shaders::*;
+use rgl;
 use std::io::Read;
 
 use std::fs::File;
@@ -11,20 +10,20 @@ use std::fs::File;
  * Note: `GLShader` is just `pub struct(GLuint)`. This is to enforce correct type is passed into the functions
  */
 
-pub fn load_shader(vertex_shader: String, fragment_shader: String) -> GLShader {
+pub fn load_shader(vertex_shader: String, fragment_shader: String) -> rgl::GLProgram {
     let vertex_source = get_source(vertex_shader);
     let fragment_source = get_source(fragment_shader);
 
-    let v_shader = compile_shader(vertex_source, GLShaderType::Vertex);
-    let f_shader = compile_shader(fragment_source, GLShaderType::Fragment);
-    let program = gl_create_program();
-    gl_attach_shader(program, v_shader);
-    gl_attach_shader(program, f_shader);
-    gl_link_program(program);
+    let v_shader = compile_shader(vertex_source, rgl::GLShaderType::Vertex);
+    let f_shader = compile_shader(fragment_source, rgl::GLShaderType::Fragment);
+    let program = rgl::create_program();
+    rgl::attach_shader(program, v_shader);
+    rgl::attach_shader(program, f_shader);
+    rgl::link_program(program);
 
     //Program linked, shaders no longer needed
-    gl_delete_shader(v_shader);
-    gl_delete_shader(f_shader);
+    rgl::delete_shader(v_shader);
+    rgl::delete_shader(f_shader);
 
     //Program object
     program
@@ -39,26 +38,26 @@ fn get_source(source_file: String) -> String {
     f_cont
 }
 
-fn compile_shader(source: String, ty: GLShaderType) -> GLShader {
-    let shader = gl_create_shader(ty);
-    gl_shader_source(shader, &source);
-    gl_compile_shader(shader);
+fn compile_shader(source: String, ty: rgl::GLShaderType) -> rgl::GLShader {
+    let shader = rgl::create_shader(ty);
+    rgl::shader_source(shader, &source);
+    rgl::compile_shader(shader);
 
     let mut compile_status = gl::FALSE as GLint;
-    gl_get_shader_iv(
+    rgl::get_shader_iv(
         shader,
-        GLShaderInfoParam::CompileStatus,
+        rgl::GLShaderInfoParam::CompileStatus,
         &mut compile_status,
     );
 
     if compile_status != (gl::TRUE as GLint) {
         let mut length = 0;
-        gl_get_shader_iv(shader, GLShaderInfoParam::InfoLogLength, &mut length);
+        rgl::get_shader_iv(shader, rgl::GLShaderInfoParam::InfoLogLength, &mut length);
 
         let mut log_buffer = Vec::with_capacity(length as usize);
         unsafe { log_buffer.set_len((length as usize) - 1) };
         let mut len = 0;
-        gl_get_shader_info_log(shader, length, &mut len, &mut log_buffer);
+        rgl::get_shader_info_log(shader, length, &mut len, &mut log_buffer);
         panic!("Could not compile shader");
     }
     shader

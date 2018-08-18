@@ -90,7 +90,7 @@ fn main() {
             }
         });
 
-        //Draw stuff
+        //Draw stuff 
         rgl::clear_color(0.5, 0.5, 0.2, 1.0);
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
         rgl::draw_elements(rgl::GLPrimitive::Triangles, 6, rgl::GLType::UInt);
@@ -98,7 +98,7 @@ fn main() {
         window.swap_buffers().unwrap();
     }
 
-    //Cleanup
+    //Cleanupgt
     rgl::delete_buffers(1, &mut ebo);
     rgl::delete_buffers(1, &mut vbo);
     rgl::delete_buffers(1, &mut colour_vbo);

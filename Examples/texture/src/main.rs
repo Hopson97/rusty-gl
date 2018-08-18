@@ -1,18 +1,11 @@
 extern crate gl;
 extern crate glutin;
 extern crate image;
-extern crate rusty_gl;
+extern crate rgl;
 
 mod shader_loader;
 
 use shader_loader::load_shader;
-
-use rusty_gl::buffers::*;
-use rusty_gl::drawing::*;
-use rusty_gl::enums::*;
-use rusty_gl::shaders::*;
-use rusty_gl::textures::*;
-
 use gl::types::*;
 
 use glutin::GlContext;
@@ -43,59 +36,59 @@ fn main() {
     //Create a vertex array object and a vertex buffer object
 
     //Create a vertex array object and a vertex buffer object
-    let mut vao = gl_gen_vertex_array();
-    let mut vbo = gl_gen_buffer();
-    let mut tex_vbo = gl_gen_buffer();
+    let mut vao = rgl::gen_vertex_array();
+    let mut vbo = rgl::gen_buffer();
+    let mut tex_vbo = rgl::gen_buffer();
 
-    gl_bind_vertex_array(vao);
+    rgl::bind_vertex_array(vao);
 
     //Vertex positions
-    gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
+    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_POS, GLUsage::StaticDraw);
-    gl_enable_vertex_attrib_array(0);
-    gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &VERTEX_POS, rgl::GLUsage::StaticDraw);
+    rgl::enable_vertex_attrib_array(0);
+    rgl::vertex_attrib_pointer(0, 2, rgl::GLType::Float, false, 0);
 
     //TEXTURE
     //Generate and bind the VBO
-    gl_bind_buffer(GLTarget::ArrayBuffer, tex_vbo);
+    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, tex_vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    gl_buffer_data(GLTarget::ArrayBuffer, &TEX_COORDS, GLUsage::StaticDraw);
-    gl_enable_vertex_attrib_array(1);
-    gl_vertex_attrib_pointer(1, 2, GLType::Float, false, 0);
+    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &TEX_COORDS, rgl::GLUsage::StaticDraw);
+    rgl::enable_vertex_attrib_array(1);
+    rgl::vertex_attrib_pointer(1, 2, rgl::GLType::Float, false, 0);
 
     //ebo
-    let mut ebo = gl_gen_buffer();;
-    gl_bind_buffer(GLTarget::ElementArrayBuffer, ebo);
-    gl_buffer_data(GLTarget::ElementArrayBuffer, &INDICES, GLUsage::StaticDraw);
+    let mut ebo = rgl::gen_buffer();;
+    rgl::bind_buffer(rgl::GLTarget::ElementArrayBuffer, ebo);
+    rgl::buffer_data(rgl::GLTarget::ElementArrayBuffer, &INDICES, rgl::GLUsage::StaticDraw);
 
     //Shaders!
     let shader_program = load_shader(
         String::from("data/shader.vert"),
         String::from("data/shader.frag"),
     );
-    gl_use_program(shader_program);
+    rgl::use_program(shader_program);
 
     let buffer = image::open("data/texture.png").unwrap();
     let dim = buffer.dimensions();
-    let mut texture = gl_gen_texture();
-    gl_active_texture(0);
-    gl_bind_texture(GLTexTarget::_2D, texture); 
-    gl_tex_image_2d(
-        GLTexTarget::_2D,
+    let mut texture = rgl::gen_texture();
+    rgl::active_texture(0);
+    rgl::bind_texture(rgl::GLTexTarget::_2D, texture); 
+    rgl::tex_image_2d(
+        rgl::GLTexTarget::_2D,
         0,
-        GLTexFormat::RGB,
+        rgl::GLTexFormat::RGB,
         dim.0 as i32,
         dim.1 as i32,
         0,
-        GLTexFormat::RGB,
+        rgl::GLTexFormat::RGB,
         &buffer.raw_pixels(),
     );
 
-    gl_tex_parameteri(GLTexTarget::_2D, GLTexParamName::MinFilter, GLTexParam::Nearest);
-    gl_tex_parameteri(GLTexTarget::_2D, GLTexParamName::MagFilter, GLTexParam::Nearest);
+    rgl::tex_parameteri(rgl::GLTexTarget::_2D, rgl::GLTexParamName::MinFilter, rgl::GLTexParam::Nearest);
+    rgl::tex_parameteri(rgl::GLTexTarget::_2D, rgl::GLTexParamName::MagFilter, rgl::GLTexParam::Nearest);
 
     //Main loop
     let mut is_running = true;
@@ -110,21 +103,21 @@ fn main() {
         });
 
         //Draw stuff
-        gl_clear_color(0.5, 0.2, 0.8, 1.0);
+        rgl::clear_color(0.5, 0.2, 0.8, 1.0);
         unsafe {
             gl::Clear(gl::COLOR_BUFFER_BIT);
         }
-        gl_draw_elements(GLPrimitive::Triangles, 6, GLType::UInt);
+        rgl::draw_elements(rgl::GLPrimitive::Triangles, 6, rgl::GLType::UInt);
 
         window.swap_buffers().unwrap();
     }
 
     //Cleanup
-    gl_delete_buffers(1, &mut ebo);
-    gl_delete_buffers(1, &mut vbo);
-    gl_delete_buffers(1, &mut tex_vbo);
-    gl_delete_vertex_arrays(1, &mut vao);
+    rgl::delete_buffers(1, &mut ebo);
+    rgl::delete_buffers(1, &mut vbo);
+    rgl::delete_buffers(1, &mut tex_vbo);
+    rgl::delete_vertex_arrays(1, &mut vao);
 
-    gl_delete_textures(1, &mut texture);
-    gl_delete_program(shader_program);
+    rgl::delete_textures(1, &mut texture);
+    rgl::delete_program(shader_program);
 }
