@@ -84,3 +84,13 @@ pub fn gl_draw_elements_instanced(
         );
     }
 }
+
+
+/// render primitives from array data
+/// 
+/// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawRangeElements.xhtml
+pub fn gl_draw_range_elements(mode: GLPrimitive, start: GLuint, end: GLuint, count: GLsizei, type_: GLType) {
+    unsafe {
+        gl::glDrawRangeElements(mode as GLenum, start, end, count, type_ as GLenum, ptr::null());
+    }
+}
