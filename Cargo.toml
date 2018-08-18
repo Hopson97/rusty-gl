@@ -1,12 +1,12 @@
 [package]
-name = "rusty_gl"
+name = "rgl"
+version = "0.1.0"
+authors = ["Matthew Hopson"]
 license = "MIT OR Apache-2.0"
 description = "Safe thin wrapper for OpenGL using the gl-rs crate"
-version = "0.1.7"
-authors = ["Matthew Hopson"]
 repository = "https://github.com/Hopson97/rusty-gl"
 readme = "README.md"
-documentation = "https://docs.rs/rusty_gl/0.1.0/rusty_gl/"
+documentation = "https://docs.rs/rgl"
 
 [dependencies]
 gl = "0.6.0"
