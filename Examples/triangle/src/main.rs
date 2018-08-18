@@ -1,15 +1,9 @@
-extern crate rusty_gl;
+extern crate rgl;
 extern crate gl;
 extern crate glutin;
 
-use rusty_gl::buffers::*;
-use rusty_gl::enums::*;
-use rusty_gl::drawing::*;
-
-use gl::types::*;
-
 use glutin::GlContext;
-
+use gl::types::*;
 
 
 static VERTEX_DATA: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
@@ -30,19 +24,19 @@ fn main() {
     gl::load_with(|s| window.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
-    let mut vao = gl_gen_vertex_array();;
-    let mut vbo = gl_gen_buffer();
+    let mut vao = rgl::gen_vertex_array();;
+    let mut vbo = rgl::gen_buffer();
 
     //Generate and bind the VAO
-    gl_bind_vertex_array(vao);
+    rgl::bind_vertex_array(vao);
 
     //Generate and bind the VBO
-    gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
+    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, GLUsage::StaticDraw);
-    gl_enable_vertex_attrib_array(0);
-    gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &VERTEX_DATA, rgl::GLUsage::StaticDraw);
+    rgl::enable_vertex_attrib_array(0);
+    rgl::vertex_attrib_pointer(0, 2, rgl::GLType::Float, false, 0);
 
     //Main loop
     let mut is_running = true;
@@ -59,15 +53,15 @@ fn main() {
         });
 
         //Draw stuff
-        gl_clear_color(0.5, 0.5, 0.8, 1.0);
+        rgl::gl_clear_color(0.5, 0.5, 0.8, 1.0);
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
-        gl_draw_arrays(GLPrimitive::Triangles, 0, 3);
+        rgl::gl_draw_arrays(rgl::GLPrimitive::Triangles, 0, 3);
 
 
         window.swap_buffers().unwrap();
     }
 
     //Cleanup
-    gl_delete_buffers(1, &mut vbo);
-    gl_delete_vertex_arrays(1, &mut vao);
+    rgl::delete_buffers(1, &mut vbo);
+    rgl::delete_vertex_arrays(1, &mut vao);
 }

@@ -16,11 +16,11 @@ pub struct VBO(GLuint);
 /// # Examples
 /// ```
 /// let mut vao = 0;
-/// gl_gen_vertex_arrays(1, &mut vao);
+/// gen_vertex_arrays(1, &mut vao);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenVertexArrays.xhtml
-pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
+pub fn gen_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
     unsafe {
         gl::GenVertexArrays(count, &mut (*arrays).0);
     }
@@ -32,11 +32,11 @@ pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
 /// 
 /// # Examples
 /// ```
-/// let mut vao = gl_gen_vertex_array();
+/// let mut vao = gen_vertex_array();
 /// ```
-pub fn gl_gen_vertex_array() -> VAO {
+pub fn gen_vertex_array() -> VAO {
     let mut vao = VAO(0);
-    gl_gen_vertex_arrays(1, &mut vao);
+    gen_vertex_arrays(1, &mut vao);
     vao
 }
 
@@ -45,11 +45,11 @@ pub fn gl_gen_vertex_array() -> VAO {
 /// # Examples
 /// ```
 /// let mut vbo = 0;
-/// gl_gen_buffers(1, &mut vbo);
+/// gen_buffers(1, &mut vbo);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
-pub fn gl_gen_buffers(count: GLsizei, buffers: *mut VBO) {
+pub fn gen_buffers(count: GLsizei, buffers: *mut VBO) {
     unsafe {
         gl::GenBuffers(count, &mut (*buffers).0);
     }
@@ -60,11 +60,11 @@ pub fn gl_gen_buffers(count: GLsizei, buffers: *mut VBO) {
 /// 
 /// # Examples
 /// ```
-/// let mut vbo = gl_gen_vertex_buffer();
+/// let mut vbo = gen_vertex_buffer();
 /// ```
-pub fn gl_gen_buffer() -> VBO {
+pub fn gen_buffer() -> VBO {
     let mut vbo = VBO(0);
-    gl_gen_buffers(1, &mut vbo);
+    gen_buffers(1, &mut vbo);
     vbo
 }
 
@@ -73,12 +73,12 @@ pub fn gl_gen_buffer() -> VBO {
 /// # Examples
 /// ```
 /// let mut vao = 0;
-/// gl_gen_vertex_arrays(1, &mut vao);
-/// gl_bind_vertex_array(vao);
+/// gen_vertex_arrays(1, &mut vao);
+/// bind_vertex_array(vao);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBindVertexArray.xhtml
-pub fn gl_bind_vertex_array(array: VAO) {
+pub fn bind_vertex_array(array: VAO) {
     unsafe {
         gl::BindVertexArray(array.0);
     }
@@ -89,12 +89,12 @@ pub fn gl_bind_vertex_array(array: VAO) {
 /// # Examples
 /// ```
 /// let mut vbo = 0;
-/// gl_gen_buffers(1, &mut vbo);
-/// gl_bind_vertex_array(vao);
+/// gen_buffers(1, &mut vbo);
+/// bind_vertex_array(vao);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
-pub fn gl_bind_buffer(target: GLTarget, buffer: VBO) {
+pub fn bind_buffer(target: GLTarget, buffer: VBO) {
     unsafe {
         gl::BindBuffer(target as u32, buffer.0);
     }
@@ -104,11 +104,11 @@ pub fn gl_bind_buffer(target: GLTarget, buffer: VBO) {
 ///
 /// # Examples
 /// ```
-/// gl_enable_vertex_attrib_array(0);
+/// enable_vertex_attrib_array(0);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glEnableVertexAttribArray.xhtml
-pub fn gl_enable_vertex_attrib_array(index: GLuint) {
+pub fn enable_vertex_attrib_array(index: GLuint) {
     unsafe {
         gl::EnableVertexAttribArray(index);
     }
@@ -118,12 +118,12 @@ pub fn gl_enable_vertex_attrib_array(index: GLuint) {
 ///
 /// # Examles
 /// ```
-/// gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+/// vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
 /// TODO that last param in a rusty way (null default for now)
-pub fn gl_vertex_attrib_pointer(
+pub fn vertex_attrib_pointer(
     index: GLuint,
     size: GLint,
     type_: GLType,
@@ -148,11 +148,11 @@ pub fn gl_vertex_attrib_pointer(
 /// ```
 /// let vertex_data: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
 /// //...
-/// gl_buffer_data(GLTarget::ArrayBuffer, &vertex_data, GLUsage::StaticDraw);
+/// buffer_data(GLTarget::ArrayBuffer, &vertex_data, GLUsage::StaticDraw);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
-pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
+pub fn buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
     unsafe {
         gl::BufferData(
             target as GLenum,
@@ -163,13 +163,13 @@ pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
     }
 }
 
-pub fn gl_delete_buffers(count: GLsizei, buffers: *mut VBO) {
+pub fn delete_buffers(count: GLsizei, buffers: *mut VBO) {
     unsafe {
         gl::DeleteBuffers(count, &mut (*buffers).0);
     }
 }
 
-pub fn gl_delete_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
+pub fn delete_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
     unsafe {
         gl::DeleteVertexArrays(count, &mut (*arrays).0);
     }

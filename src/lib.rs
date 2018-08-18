@@ -29,7 +29,6 @@ pub mod enums;
 pub mod shaders;
 pub mod textures;
 
-
 pub use buffers::*;
 pub use drawing::*;
 pub use enums::*;
