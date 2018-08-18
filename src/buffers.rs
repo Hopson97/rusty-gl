@@ -26,7 +26,6 @@ pub fn gl_gen_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
     }
 }
 
-
 /// Generates a single VAO
 /// No need to create the VAO seperatly!
 /// 
