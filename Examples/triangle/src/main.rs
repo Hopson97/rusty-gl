@@ -53,9 +53,9 @@ fn main() {
         });
 
         //Draw stuff
-        rgl::gl_clear_color(0.5, 0.5, 0.8, 1.0);
+        rgl::clear_color(0.5, 0.5, 0.8, 1.0);
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
-        rgl::gl_draw_arrays(rgl::GLPrimitive::Triangles, 0, 3);
+        rgl::draw_arrays(rgl::GLPrimitive::Triangles, 0, 3);
 
 
         window.swap_buffers().unwrap();

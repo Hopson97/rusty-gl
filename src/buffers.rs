@@ -16,7 +16,7 @@ pub struct VBO(GLuint);
 /// # Examples
 /// ```
 /// let mut vao = 0;
-/// gen_vertex_arrays(1, &mut vao);
+/// rgl::gen_vertex_arrays(1, &mut vao);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenVertexArrays.xhtml
@@ -32,7 +32,7 @@ pub fn gen_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
 /// 
 /// # Examples
 /// ```
-/// let mut vao = gen_vertex_array();
+/// let mut vao = rgl::gen_vertex_array();
 /// ```
 pub fn gen_vertex_array() -> VAO {
     let mut vao = VAO(0);
@@ -45,7 +45,7 @@ pub fn gen_vertex_array() -> VAO {
 /// # Examples
 /// ```
 /// let mut vbo = 0;
-/// gen_buffers(1, &mut vbo);
+/// rgl::gen_buffers(1, &mut vbo);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
@@ -60,7 +60,7 @@ pub fn gen_buffers(count: GLsizei, buffers: *mut VBO) {
 /// 
 /// # Examples
 /// ```
-/// let mut vbo = gen_vertex_buffer();
+/// let mut vbo = rgl::gen_vertex_buffer();
 /// ```
 pub fn gen_buffer() -> VBO {
     let mut vbo = VBO(0);
@@ -73,8 +73,8 @@ pub fn gen_buffer() -> VBO {
 /// # Examples
 /// ```
 /// let mut vao = 0;
-/// gen_vertex_arrays(1, &mut vao);
-/// bind_vertex_array(vao);
+/// rgl::gen_vertex_arrays(1, &mut vao);
+/// rgl::bind_vertex_array(vao);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBindVertexArray.xhtml
@@ -89,8 +89,8 @@ pub fn bind_vertex_array(array: VAO) {
 /// # Examples
 /// ```
 /// let mut vbo = 0;
-/// gen_buffers(1, &mut vbo);
-/// bind_vertex_array(vao);
+/// rgl::gen_buffers(1, &mut vbo);
+/// rgl::bind_vertex_array(vao);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
@@ -104,7 +104,7 @@ pub fn bind_buffer(target: GLTarget, buffer: VBO) {
 ///
 /// # Examples
 /// ```
-/// enable_vertex_attrib_array(0);
+/// rgl::enable_vertex_attrib_array(0);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glEnableVertexAttribArray.xhtml
@@ -118,7 +118,7 @@ pub fn enable_vertex_attrib_array(index: GLuint) {
 ///
 /// # Examles
 /// ```
-/// vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+/// rgl::vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
@@ -148,7 +148,7 @@ pub fn vertex_attrib_pointer(
 /// ```
 /// let vertex_data: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
 /// //...
-/// buffer_data(GLTarget::ArrayBuffer, &vertex_data, GLUsage::StaticDraw);
+/// rgl::buffer_data(GLTarget::ArrayBuffer, &vertex_data, GLUsage::StaticDraw);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml

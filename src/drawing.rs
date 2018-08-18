@@ -9,18 +9,18 @@ use super::enums::*;
 ///
 /// # Examples
 /// ```
-/// gl_clear_color(0.5, 0.5, 0.2, 1.0);
+/// rgl::clear_color(0.5, 0.5, 0.2, 1.0);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glClearColor.xhtml
-pub fn gl_clear_color(red: GLfloat, green: GLfloat, blue: GLfloat, aplha: GLfloat) {
+pub fn clear_color(red: GLfloat, green: GLfloat, blue: GLfloat, aplha: GLfloat) {
     unsafe {
         gl::ClearColor(red, green, blue, aplha);
     }
 }
 
 /*
-pub fn gl_clear(mask: GLClearMask) {
+pub fn clear(mask: GLClearMask) {
     unsafe {
         gl::Clear(mask as GLenum);
     }
@@ -31,12 +31,12 @@ pub fn gl_clear(mask: GLClearMask) {
 ///
 /// # Examples
 /// ```
-/// gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
-/// gl_draw_arrays(GLPrimitive::Triangles, 0, 3);
+/// rgl::bind_buffer(GLTarget::ArrayBuffer, vbo);
+/// rgl::draw_arrays(GLPrimitive::Triangles, 0, 3);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml
-pub fn gl_draw_arrays(primitive: GLPrimitive, first: GLint, count: GLsizei) {
+pub fn draw_arrays(primitive: GLPrimitive, first: GLint, count: GLsizei) {
     unsafe {
         gl::DrawArrays(primitive as u32, first, count);
     }
@@ -46,13 +46,13 @@ pub fn gl_draw_arrays(primitive: GLPrimitive, first: GLint, count: GLsizei) {
 ///
 /// # Examples
 /// ```
-/// gl_bind_vertex_array(GLTarget::ArrayBuffer, vao);
-/// gl_draw_elements(GLPrimitive::Triangles, 36, GLType::UInt);
+/// rgl::bind_vertex_array(GLTarget::ArrayBuffer, vao);
+/// rgl::draw_elements(GLPrimitive::Triangles, 36, GLType::UInt);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml
 /// TODO: ptr thing
-pub fn gl_draw_elements(primitive: GLPrimitive, count: GLsizei, type_: GLType) {
+pub fn draw_elements(primitive: GLPrimitive, count: GLsizei, type_: GLType) {
     unsafe {
         gl::DrawElements(primitive as GLenum, count, type_ as GLenum, ptr::null());
     }
@@ -62,13 +62,13 @@ pub fn gl_draw_elements(primitive: GLPrimitive, count: GLsizei, type_: GLType) {
 ///
 /// # Examples
 /// ```
-/// gl_bind_vertex_array(GLTarget::ArrayBuffer, vao);
-/// gl_draw_elements_instanced(GLPrimitive::Triangles, 36, GLType::UInt, 8);
+/// rgl::bind_vertex_array(GLTarget::ArrayBuffer, vao);
+/// rgl::draw_elements_instanced(GLPrimitive::Triangles, 36, GLType::UInt, 8);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawElementsInstanced.xhtml
 /// TODO: Ptr thing
-pub fn gl_draw_elements_instanced(
+pub fn draw_elements_instanced(
     primitive: GLPrimitive,
     count: GLsizei,
     type_: GLType,
@@ -89,7 +89,7 @@ pub fn gl_draw_elements_instanced(
 /// render primitives from array data
 /// 
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawRangeElements.xhtml
-pub fn gl_draw_range_elements(mode: GLPrimitive, start: GLuint, end: GLuint, count: GLsizei, type_: GLType) {
+pub fn draw_range_elements(mode: GLPrimitive, start: GLuint, end: GLuint, count: GLsizei, type_: GLType) {
     unsafe {
         gl::DrawRangeElements(mode as GLenum, start, end, count, type_ as GLenum, ptr::null());
     }
