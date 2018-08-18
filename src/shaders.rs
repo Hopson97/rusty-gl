@@ -104,3 +104,26 @@ pub fn gl_get_uniform_location(program: GLProgram, name: &str) -> GLUniformLocat
 
 
 //Only going to use commonly used ones for now, may add the rest later
+pub fn gl_uniform1f(location: GLUniformLocation, v0: GLfloat) {
+    unsafe {
+        gl::Uniform1f(location.0, v0);
+    }
+}
+
+pub fn gl_uniform2f(location: GLUniformLocation, v0: GLfloat, v1: GLfloat) {
+    unsafe {
+        gl::Uniform2f(location.0, v0, v1);
+    }
+}
+
+pub fn gl_uniform3f(location: GLUniformLocation, v0: GLfloat, v1: GLfloat, v2: GLfloat) {
+    unsafe {
+        gl::Uniform3f(location.0, v0, v1, v2);
+    }
+}
+
+pub fn gl_uniform4f(location: GLUniformLocation, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) {
+    unsafe {
+        gl::Uniform4f(location.0, v0, v1, v2, v3);
+    }
+}
