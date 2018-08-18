@@ -43,7 +43,7 @@ would not work, as `gl_bind_buffer` expects type `struct VBO(GLuint)`, but vao i
 # Usage
 ```toml
 [dependancies]
-rusty_gl = "0.1.6"
+rgl = "0.1.1"
 gl = "0.6.0"
 ```
 
