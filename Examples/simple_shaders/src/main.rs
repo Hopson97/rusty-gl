@@ -1,15 +1,10 @@
-extern crate rusty_gl;
+extern crate rgl;
 extern crate gl;
 extern crate glutin;
 
 mod shader_loader;
 
 use shader_loader::load_shader;
-
-use rusty_gl::buffers::*;
-use rusty_gl::enums::*;
-use rusty_gl::drawing::*;
-use rusty_gl::shaders::*;
 
 use gl::types::*;
 
@@ -50,36 +45,36 @@ fn main() {
     gl::load_with(|s| window.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
-    let mut vao = gl_gen_vertex_array();
-    let mut vbo = gl_gen_buffer();
-    let mut colour_vbo = gl_gen_buffer();
+    let mut vao = rgl::gen_vertex_array();
+    let mut vbo = rgl::gen_buffer();
+    let mut colour_vbo = rgl::gen_buffer();
 
-    gl_bind_vertex_array(vao);
+    rgl::bind_vertex_array(vao);
 
     //Vertex positions
-    gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
+    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_POS, GLUsage::StaticDraw);
-    gl_enable_vertex_attrib_array(0);
-    gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &VERTEX_POS, rgl::GLUsage::StaticDraw);
+    rgl::enable_vertex_attrib_array(0);
+    rgl::vertex_attrib_pointer(0, 2, rgl::GLType::Float, false, 0);
 
     //COLOURS
-    gl_bind_buffer(GLTarget::ArrayBuffer, colour_vbo);
+    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, colour_vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    gl_buffer_data(GLTarget::ArrayBuffer, &COLOURS, GLUsage::StaticDraw);
-    gl_enable_vertex_attrib_array(1);
-    gl_vertex_attrib_pointer(1, 3, GLType::Float, false, 0);
+    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &COLOURS, rgl::GLUsage::StaticDraw);
+    rgl::enable_vertex_attrib_array(1);
+    rgl::vertex_attrib_pointer(1, 3, rgl::GLType::Float, false, 0);
 
     //ebo
-    let mut ebo = gl_gen_buffer();
-    gl_bind_buffer(GLTarget::ElementArrayBuffer, ebo);
-    gl_buffer_data(GLTarget::ElementArrayBuffer, &INDICES, GLUsage::StaticDraw);
+    let mut ebo = rgl::gen_buffer();
+    rgl::bind_buffer(rgl::GLTarget::ElementArrayBuffer, ebo);
+    rgl::buffer_data(rgl::GLTarget::ElementArrayBuffer, &INDICES, rgl::GLUsage::StaticDraw);
 
     //Shaders!
     let shader_program = load_shader(String::from("data/shader.vert"), String::from("data/shader.frag"));
-    gl_use_program(shader_program);
+    rgl::use_program(shader_program);
 
     //Main loop
     let mut is_running = true;
@@ -96,17 +91,18 @@ fn main() {
         });
 
         //Draw stuff
-        gl_clear_color(0.5, 0.5, 0.2, 1.0);
+        rgl::clear_color(0.5, 0.5, 0.2, 1.0);
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
-        gl_draw_elements(GLPrimitive::Triangles, 6, GLType::UInt);
+        rgl::draw_elements(rgl::GLPrimitive::Triangles, 6, rgl::GLType::UInt);
 
         window.swap_buffers().unwrap();
     }
 
     //Cleanup
-    gl_delete_buffers(1, &mut ebo);
-    gl_delete_buffers(1, &mut vbo);
-    gl_delete_vertex_arrays(1, &mut vao);
+    rgl::delete_buffers(1, &mut ebo);
+    rgl::delete_buffers(1, &mut vbo);
+    rgl::delete_buffers(1, &mut colour_vbo);
+    rgl::delete_vertex_arrays(1, &mut vao);
 
-    gl_delete_program(shader_program);
+    rgl::delete_program(shader_program);
 }
