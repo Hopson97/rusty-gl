@@ -38,7 +38,6 @@ would not work, as `gl_bind_buffer` expects type `struct VBO(GLuint)`, but vao i
 # Roadmap
 
 * Framebuffer objects
-* Uniform shader variables functions
 * More OpenGL functions (Right now there is basically only the minimum!)
 
 # Usage
