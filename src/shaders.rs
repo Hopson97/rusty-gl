@@ -20,7 +20,7 @@ pub mod rgl {
         unsafe { GLProgram(gl::CreateProgram()) }
     }
 
-    pub fn create_shader(type_: GLShaderType) -> GLShader {
+    pub fn create_shader(type_: rgl::ShaderType) -> GLShader {
         unsafe { GLShader(gl::CreateShader(type_ as GLenum)) }
     }
 
@@ -42,7 +42,7 @@ pub mod rgl {
         }
     }
 
-    pub fn get_shader_iv(shader: GLShader, parameter: GLShaderInfoParam, status: &mut GLint) {
+    pub fn get_shader_iv(shader: GLShader, parameter: rgl::ShaderInfoParam, status: &mut GLint) {
         unsafe {
             gl::GetShaderiv(shader.0, parameter as GLenum, status);
         }

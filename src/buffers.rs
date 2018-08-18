@@ -93,7 +93,7 @@ pub fn gl_bind_vertex_array(array: VAO) {
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
-pub fn gl_bind_buffer(target: GLTarget, buffer: VBO) {
+pub fn gl_bind_buffer(target: rgl::Target, buffer: VBO) {
     unsafe {
         gl::BindBuffer(target as u32, buffer.0);
     }
@@ -125,7 +125,7 @@ pub fn gl_enable_vertex_attrib_array(index: GLuint) {
 pub fn gl_vertex_attrib_pointer(
     index: GLuint,
     size: GLint,
-    type_: GLType,
+    type_: rgl::Type,
     normalised: bool,
     stride: GLsizei,
 ) {
@@ -151,7 +151,7 @@ pub fn gl_vertex_attrib_pointer(
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
-pub fn gl_buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
+pub fn gl_buffer_data<T>(target: rgl::Target, data: &[T], usage: rgl::Usage) {
     unsafe {
         gl::BufferData(
             target as GLenum,

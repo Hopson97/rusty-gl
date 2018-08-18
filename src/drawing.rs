@@ -36,7 +36,7 @@ pub fn gl_clear(mask: GLClearMask) {
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml
-pub fn gl_draw_arrays(primitive: GLPrimitive, first: GLint, count: GLsizei) {
+pub fn gl_draw_arrays(primitive: rgl::Primitive, first: GLint, count: GLsizei) {
     unsafe {
         gl::DrawArrays(primitive as u32, first, count);
     }
@@ -52,7 +52,7 @@ pub fn gl_draw_arrays(primitive: GLPrimitive, first: GLint, count: GLsizei) {
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml
 /// TODO: ptr thing
-pub fn gl_draw_elements(primitive: GLPrimitive, count: GLsizei, type_: GLType) {
+pub fn gl_draw_elements(primitive: rgl::Primitive, count: GLsizei, type_: rgl::Type) {
     unsafe {
         gl::DrawElements(primitive as GLenum, count, type_ as GLenum, ptr::null());
     }
@@ -69,9 +69,9 @@ pub fn gl_draw_elements(primitive: GLPrimitive, count: GLsizei, type_: GLType) {
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawElementsInstanced.xhtml
 /// TODO: Ptr thing
 pub fn gl_draw_elements_instanced(
-    primitive: GLPrimitive,
+    primitive: rgl::Primitive,
     count: GLsizei,
-    type_: GLType,
+    type_: rgl::Type,
     prim_count: GLsizei,
 ) {
     unsafe {

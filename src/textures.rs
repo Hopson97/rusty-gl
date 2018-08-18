@@ -28,7 +28,7 @@ pub mod rgl {
         }
     }
 
-    pub fn bind_texture(target: GLTexTarget, texture: GLTexture) {
+    pub fn bind_texture(target: rgl::TexTarget, texture: GLTexture) {
         unsafe {
             gl::BindTexture(target as GLenum, texture.0);
         }
@@ -41,13 +41,13 @@ pub mod rgl {
     }
 
     pub fn tex_image_2d(
-        target: GLTexTarget,
+        target: rgl::TexTarget,
         level: GLint,
-        internal_format: GLTexFormat,
+        internal_format: rgl::TexFormat,
         width: GLsizei,
         height: GLsizei,
         border: GLint,
-        format: GLTexFormat,
+        format: rgl::TexFormat,
         pixels: &Vec<u8>,
     ) {
         unsafe {
@@ -65,13 +65,13 @@ pub mod rgl {
         }
     }
 
-    pub fn generate_mipmap(target: GLTexTarget) {
+    pub fn generate_mipmap(target: rgl::TexTarget) {
         unsafe {
             gl::GenerateMipmap(target as GLenum);
         }
     }
 
-    pub fn tex_parameteri(target: GLTexTarget, param_name: GLTexParamName, param: GLTexParam) {
+    pub fn tex_parameteri(target: rgl::TexTarget, param_name: rgl::TexParamName, param: rgl::TexParam) {
         unsafe {
             gl::TexParameteri(target as GLenum, param_name as GLenum, param as GLenum as i32);
         }
