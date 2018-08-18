@@ -89,24 +89,25 @@ Is instead written like
 
 ```rust
     //Create a vertex array object and a vertex buffer object
-    let mut vao = gl_gen_vertex_array();
-    let mut vbo = gl_gen_buffer();
+    let mut vao = rgl::gen_vertex_array();
+    let mut vbo = rgl::gen_buffer();
 
     //Generate and bind the VAO
-    gl_bind_vertex_array(vao);
+    rgl::gl_bind_vertex_array(vao);
 
     //Generate and bind the VBO
-    gl_bind_buffer(GLTarget::ArrayBuffer, vbo);
+    rgl::gl_bind_buffer(rgl::GLTarget::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    gl_buffer_data(GLTarget::ArrayBuffer, &VERTEX_DATA, GLUsage::StaticDraw);
-    gl_enable_vertex_attrib_array(0);
-    gl_vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &VERTEX_DATA, rgl::GLUsage::StaticDraw);
+    rgl::enable_vertex_attrib_array(0);
+    rgl::vertex_attrib_pointer(0, 2, rgl::GLType::Float, false, 0);
 ```
 
 Changes include:
 
 * snake_case over PascalCase for function names
+* rgl crate
 * No need for the `unsafe {...}` blocks
 * Strongly typed enums over the error-prone GLenum (Where you can easily pass the incorrect enum)
 * No need to cast types to `std::os::raw::c_void`, rusty-gl will do this for you
