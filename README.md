@@ -43,7 +43,7 @@ would not work, as `gl_bind_buffer` expects type `struct VBO(GLuint)`, but vao i
 # Usage
 ```toml
 [dependancies]
-rgl = "0.1.1"
+rgl = "0.2.0"
 gl = "0.6.0"
 ```
 
@@ -96,12 +96,12 @@ Is instead written like
     rgl::gl_bind_vertex_array(vao);
 
     //Generate and bind the VBO
-    rgl::gl_bind_buffer(rgl::GLTarget::ArrayBuffer, vbo);
+    rgl::gl_bind_buffer(rgl::Target::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &VERTEX_DATA, rgl::GLUsage::StaticDraw);
+    rgl::buffer_data(rgl::Target::ArrayBuffer, &VERTEX_DATA, rgl::Usage::StaticDraw);
     rgl::enable_vertex_attrib_array(0);
-    rgl::vertex_attrib_pointer(0, 2, rgl::GLType::Float, false, 0);
+    rgl::vertex_attrib_pointer(0, 2, rgl::Type::Float, false, 0);
 ```
 
 Changes include:
