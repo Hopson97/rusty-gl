@@ -2,20 +2,20 @@ use gl;
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLTarget {
+pub enum Target {
     ArrayBuffer = gl::ARRAY_BUFFER,
     ElementArrayBuffer = gl::ELEMENT_ARRAY_BUFFER,
 }
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLUsage {
+pub enum Usage {
     StaticDraw = gl::STATIC_DRAW,
 }
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLType {
+pub enum Type {
     Float = gl::FLOAT,
 
     UByte = gl::UNSIGNED_BYTE,
@@ -25,7 +25,7 @@ pub enum GLType {
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLClearMask {
+pub enum ClearMask {
     ColorBufferBit = gl::COLOR_BUFFER_BIT,
     DepthBufferBit = gl::DEPTH_BUFFER_BIT,
     StencilBufferBit = gl::STENCIL_BUFFER_BIT,
@@ -33,21 +33,21 @@ pub enum GLClearMask {
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLPrimitive {
+pub enum Primitive {
     Triangles = gl::TRIANGLES,
 }
-pub type GLMode = GLPrimitive;
+pub type Mode = Primitive;
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLShaderType {
+pub enum ShaderType {
     Vertex = gl::VERTEX_SHADER,
     Fragment = gl::FRAGMENT_SHADER,
 }
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLShaderInfoParam {
+pub enum ShaderInfoParam {
     ShaderType = gl::SHADER_TYPE,
     DeleteStatus = gl::DELETE_STATUS,
     CompileStatus = gl::COMPILE_STATUS,
@@ -57,21 +57,21 @@ pub enum GLShaderInfoParam {
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLTexTarget {
+pub enum TexTarget {
     _2D = gl::TEXTURE_2D,
     CubeMap = gl::TEXTURE_CUBE_MAP
 }
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLTexFormat {
+pub enum TexFormat {
     RGB = gl::RGB,
     RGBA = gl::RGBA,
 }
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLTexParamName {
+pub enum TexParamName {
     MinFilter = gl::TEXTURE_MIN_FILTER,
     MagFilter = gl::TEXTURE_MAG_FILTER,
     WrapS = gl::TEXTURE_WRAP_S,
@@ -80,7 +80,7 @@ pub enum GLTexParamName {
 
 #[repr(u32)]
 #[derive(Clone, Copy)]
-pub enum GLTexParam {
+pub enum TexParam {
     Nearest = gl::NEAREST,
     Linear = gl::LINEAR,
     NearestMipmapNearest = gl::NEAREST_MIPMAP_NEAREST,

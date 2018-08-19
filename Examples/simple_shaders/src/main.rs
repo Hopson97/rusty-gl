@@ -52,25 +52,25 @@ fn main() {
     rgl::bind_vertex_array(vao);
 
     //Vertex positions
-    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, vbo);
+    rgl::bind_buffer(rgl::Target::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &VERTEX_POS, rgl::GLUsage::StaticDraw);
+    rgl::buffer_data(rgl::Target::ArrayBuffer, &VERTEX_POS, rgl::Usage::StaticDraw);
     rgl::enable_vertex_attrib_array(0);
-    rgl::vertex_attrib_pointer(0, 2, rgl::GLType::Float, false, 0);
+    rgl::vertex_attrib_pointer(0, 2, rgl::Type::Float, false, 0);
 
     //COLOURS
-    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, colour_vbo);
+    rgl::bind_buffer(rgl::Target::ArrayBuffer, colour_vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &COLOURS, rgl::GLUsage::StaticDraw);
+    rgl::buffer_data(rgl::Target::ArrayBuffer, &COLOURS, rgl::Usage::StaticDraw);
     rgl::enable_vertex_attrib_array(1);
-    rgl::vertex_attrib_pointer(1, 3, rgl::GLType::Float, false, 0);
+    rgl::vertex_attrib_pointer(1, 3, rgl::Type::Float, false, 0);
 
     //ebo
     let mut ebo = rgl::gen_buffer();
-    rgl::bind_buffer(rgl::GLTarget::ElementArrayBuffer, ebo);
-    rgl::buffer_data(rgl::GLTarget::ElementArrayBuffer, &INDICES, rgl::GLUsage::StaticDraw);
+    rgl::bind_buffer(rgl::Target::ElementArrayBuffer, ebo);
+    rgl::buffer_data(rgl::Target::ElementArrayBuffer, &INDICES, rgl::Usage::StaticDraw);
 
     //Shaders!
     let shader_program = load_shader(String::from("data/shader.vert"), String::from("data/shader.frag"));
@@ -93,7 +93,7 @@ fn main() {
         //Draw stuff 
         rgl::clear_color(0.5, 0.5, 0.2, 1.0);
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
-        rgl::draw_elements(rgl::GLPrimitive::Triangles, 6, rgl::GLType::UInt);
+        rgl::draw_elements(rgl::Primitive::Triangles, 6, rgl::Type::UInt);
 
         window.swap_buffers().unwrap();
     }

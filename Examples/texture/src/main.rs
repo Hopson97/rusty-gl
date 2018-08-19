@@ -43,26 +43,26 @@ fn main() {
     rgl::bind_vertex_array(vao);
 
     //Vertex positions
-    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, vbo);
+    rgl::bind_buffer(rgl::Target::ArrayBuffer, vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &VERTEX_POS, rgl::GLUsage::StaticDraw);
+    rgl::buffer_data(rgl::Target::ArrayBuffer, &VERTEX_POS, rgl::Usage::StaticDraw);
     rgl::enable_vertex_attrib_array(0);
-    rgl::vertex_attrib_pointer(0, 2, rgl::GLType::Float, false, 0);
+    rgl::vertex_attrib_pointer(0, 2, rgl::Type::Float, false, 0);
 
     //TEXTURE
     //Generate and bind the VBO
-    rgl::bind_buffer(rgl::GLTarget::ArrayBuffer, tex_vbo);
+    rgl::bind_buffer(rgl::Target::ArrayBuffer, tex_vbo);
 
     //Buffer the vertex data and tell OpenGL the structure
-    rgl::buffer_data(rgl::GLTarget::ArrayBuffer, &TEX_COORDS, rgl::GLUsage::StaticDraw);
+    rgl::buffer_data(rgl::Target::ArrayBuffer, &TEX_COORDS, rgl::Usage::StaticDraw);
     rgl::enable_vertex_attrib_array(1);
-    rgl::vertex_attrib_pointer(1, 2, rgl::GLType::Float, false, 0);
+    rgl::vertex_attrib_pointer(1, 2, rgl::Type::Float, false, 0);
 
     //ebo
     let mut ebo = rgl::gen_buffer();;
-    rgl::bind_buffer(rgl::GLTarget::ElementArrayBuffer, ebo);
-    rgl::buffer_data(rgl::GLTarget::ElementArrayBuffer, &INDICES, rgl::GLUsage::StaticDraw);
+    rgl::bind_buffer(rgl::Target::ElementArrayBuffer, ebo);
+    rgl::buffer_data(rgl::Target::ElementArrayBuffer, &INDICES, rgl::Usage::StaticDraw);
 
     //Shaders!
     let shader_program = load_shader(
@@ -75,20 +75,20 @@ fn main() {
     let dim = buffer.dimensions();
     let mut texture = rgl::gen_texture();
     rgl::active_texture(0);
-    rgl::bind_texture(rgl::GLTexTarget::_2D, texture); 
+    rgl::bind_texture(rgl::TexTarget::_2D, texture); 
     rgl::tex_image_2d(
-        rgl::GLTexTarget::_2D,
+        rgl::TexTarget::_2D,
         0,
-        rgl::GLTexFormat::RGB,
+        rgl::TexFormat::RGB,
         dim.0 as i32,
         dim.1 as i32,
         0,
-        rgl::GLTexFormat::RGB,
+        rgl::TexFormat::RGB,
         &buffer.raw_pixels(),
     );
 
-    rgl::tex_parameteri(rgl::GLTexTarget::_2D, rgl::GLTexParamName::MinFilter, rgl::GLTexParam::Nearest);
-    rgl::tex_parameteri(rgl::GLTexTarget::_2D, rgl::GLTexParamName::MagFilter, rgl::GLTexParam::Nearest);
+    rgl::tex_parameteri(rgl::TexTarget::_2D, rgl::TexParamName::MinFilter, rgl::TexParam::Nearest);
+    rgl::tex_parameteri(rgl::TexTarget::_2D, rgl::TexParamName::MagFilter, rgl::TexParam::Nearest);
 
     //Main loop
     let mut is_running = true;
@@ -107,7 +107,7 @@ fn main() {
         unsafe {
             gl::Clear(gl::COLOR_BUFFER_BIT);
         }
-        rgl::draw_elements(rgl::GLPrimitive::Triangles, 6, rgl::GLType::UInt);
+        rgl::draw_elements(rgl::Primitive::Triangles, 6, rgl::Type::UInt);
 
         window.swap_buffers().unwrap();
     }

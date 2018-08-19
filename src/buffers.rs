@@ -3,7 +3,7 @@ use gl::types::*;
 use std::mem;
 use std::ptr;
 
-use super::enums::*;
+use super::enums;
 
 #[derive(Clone, Copy)]
 pub struct VAO(GLuint);
@@ -94,7 +94,7 @@ pub fn bind_vertex_array(array: VAO) {
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
-pub fn bind_buffer(target: GLTarget, buffer: VBO) {
+pub fn bind_buffer(target: enums::Target, buffer: VBO) {
     unsafe {
         gl::BindBuffer(target as u32, buffer.0);
     }
@@ -118,7 +118,7 @@ pub fn enable_vertex_attrib_array(index: GLuint) {
 ///
 /// # Examles
 /// ```
-/// rgl::vertex_attrib_pointer(0, 2, GLType::Float, false, 0);
+/// rgl::vertex_attrib_pointer(0, 2, rgl::Type::Float, false, 0);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
@@ -126,7 +126,7 @@ pub fn enable_vertex_attrib_array(index: GLuint) {
 pub fn vertex_attrib_pointer(
     index: GLuint,
     size: GLint,
-    type_: GLType,
+    type_: enums::Type,
     normalised: bool,
     stride: GLsizei,
 ) {
@@ -148,11 +148,11 @@ pub fn vertex_attrib_pointer(
 /// ```
 /// let vertex_data: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
 /// //...
-/// rgl::buffer_data(GLTarget::ArrayBuffer, &vertex_data, GLUsage::StaticDraw);
+/// rgl::buffer_data(rgl::Target::ArrayBuffer, &vertex_data, rgl::GLUsage::StaticDraw);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
-pub fn buffer_data<T>(target: GLTarget, data: &[T], usage: GLUsage) {
+pub fn buffer_data<T>(target: enums::Target, data: &[T], usage: enums::Usage) {
     unsafe {
         gl::BufferData(
             target as GLenum,
