@@ -10,6 +10,7 @@ static VERTEX_DATA: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
 
 fn main() {
     //Set up the window
+    /*
     let mut events_loop = glutin::EventsLoop::new();
     let win_builder = glutin::WindowBuilder::new();
     let ctx_builder = glutin::ContextBuilder::new();
@@ -22,6 +23,8 @@ fn main() {
 
     //Load gl library
     gl::load_with(|s| window.get_proc_address(s) as *const _);
+*/
+    let mut display = rgl::Display::new("Cool window", 1280.0, 720.0);
 
     //Create a vertex array object and a vertex buffer object
     let mut vao = rgl::gen_vertex_array();;
@@ -38,6 +41,17 @@ fn main() {
     rgl::enable_vertex_attrib_array(0);
     rgl::vertex_attrib_pointer(0, 2, rgl::Type::Float, false, 0);
 
+    while display.is_open() {
+        let e = display.get_events();
+        e.poll_events(|event| {
+            match event {
+                rgl::display::WinEvent::Close => display.close(),
+                _ => ()
+            }
+        });
+
+    }
+/*
     //Main loop
     let mut is_running = true;
     while is_running {
@@ -60,6 +74,7 @@ fn main() {
 
         window.swap_buffers().unwrap();
     }
+*/
 
     //Cleanup
     rgl::delete_buffers(1, &mut vbo);

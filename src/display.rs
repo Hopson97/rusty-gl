@@ -14,14 +14,19 @@ use std::rc::Rc;
 use gl;
 
 pub struct Display {
-    event_loop: Rc<glutin::EventsLoop>,
+    event_loop: DisplayEventLoop,
     window: glutin::GlWindow,
     is_open: bool
 }
 
+pub struct DisplayEventLoop {
+    event_loop: Rc<glutin::EventsLoop>,
+}
+
 #[derive(Clone)]
 pub enum WinEvent {
-    Close
+    Close,
+    NoEvent
 }
 
 impl Display {
@@ -36,7 +41,7 @@ impl Display {
 
         //Create the display itself...
         let disp = Display {
-            event_loop: event_loop.clone(),
+            event_loop: DisplayEventLoop::new(Rc::clone(&event_loop)),
             window: glutin::GlWindow::new(win_builder, ctx_builder, &event_loop).unwrap(),
             is_open: true,
         };
@@ -50,18 +55,13 @@ impl Display {
         disp
     }
 
-    pub fn poll_events(&mut self, f: &Fn(WinEvent)) {
-        let event_loop = Rc::get_mut(&mut self.event_loop).unwrap();
-        event_loop.poll_events(|event| match event {
-            glutin::Event::WindowEvent { event, .. } => match event {
-                glutin::WindowEvent::CloseRequested => f(WinEvent::Close),
-                _ => (),
-            },
-            _ => (),
-        });
+    pub fn get_events(&self) -> &DisplayEventLoop {
+        &self.event_loop
     }
 
-
+    pub fn is_open(&self) -> bool {
+        self.is_open
+    }
 
     pub fn close(&mut self) {
         self.is_open = false;
@@ -70,5 +70,26 @@ impl Display {
     /// Swap the window buffers, displaying what has been drawn to the window
     pub fn display(&self) {
         self.window.swap_buffers().unwrap();
+    }
+}
+
+impl DisplayEventLoop {
+    pub fn new(el: Rc<glutin::EventsLoop>) -> DisplayEventLoop {
+        DisplayEventLoop {
+            event_loop: el
+        }
+    }
+
+    pub fn poll_events<F>(&mut self, callback: F) 
+        where F: FnMut (WinEvent)
+    {
+        let event_loop = Rc::get_mut(&mut self.event_loop).unwrap();
+        event_loop.poll_events(|event| match event {
+            glutin::Event::WindowEvent { event, .. } => match event {
+                glutin::WindowEvent::CloseRequested => callback(WinEvent::Close),
+                _ => (),
+            },
+            _ => (),
+        });
     }
 }

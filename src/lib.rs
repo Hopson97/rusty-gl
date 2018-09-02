@@ -36,3 +36,4 @@ pub use drawing::*;
 pub use enums::*;
 pub use shaders::*;
 pub use textures::*;
+pub use display::*;
