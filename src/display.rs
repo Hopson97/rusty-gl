@@ -13,9 +13,12 @@ use std::rc::Rc;
 
 use gl;
 
+use drawing;
+
 pub struct Display {
     event_loop: Rc<glutin::EventsLoop>,
-    window: glutin::GlWindow
+    window: glutin::GlWindow,
+    is_open: bool
 }
 
 impl Display {
@@ -28,7 +31,8 @@ impl Display {
 
         let disp = Display {
             event_loop: event_loop.clone(),
-            window: glutin::GlWindow::new(win_builder, ctx_builder, &event_loop).unwrap();
+            window: glutin::GlWindow::new(win_builder, ctx_builder, &event_loop).unwrap(),
+            is_open: true,
         };
 
         unsafe {
@@ -38,5 +42,9 @@ impl Display {
         gl::load_with(|symbol| disp.window.get_proc_address(symbol) as *const _);
 
         disp
+    }
+
+    pub fn display(&self) {
+        self.window.swap_buffers().unwrap();
     }
 }
