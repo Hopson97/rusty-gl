@@ -10,4 +10,4 @@ documentation = "https://docs.rs/rgl"
 
 [dependencies]
 gl = "0.6.0"
-glutin = 
+glutin = "*"

@@ -22,12 +22,14 @@
 //!         for types. Also, none of the functions require `unsafe {}` blocks to be used.
 
 extern crate gl;
+extern crate glutin;
 
 pub mod buffers;
 pub mod drawing;
 pub mod enums;
 pub mod shaders;
 pub mod textures;
+pub mod display;
 
 pub use buffers::*;
 pub use drawing::*;
