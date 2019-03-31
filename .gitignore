@@ -11,3 +11,5 @@ Examples/simple_shaders/Cargo.lock
 
 Examples/texture/target/
 Examples/texture/Cargo.lock
+
+.vscode
