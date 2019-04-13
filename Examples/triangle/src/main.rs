@@ -2,7 +2,7 @@ extern crate rgl;
 extern crate gl;
 extern crate glutin;
 
-use glutin::GlContext;
+use glutin::ContextTrait;
 use gl::types::*;
 
 
@@ -14,14 +14,15 @@ fn main() {
     let win_builder = glutin::WindowBuilder::new();
     let ctx_builder = glutin::ContextBuilder::new();
 
-    let window = glutin::GlWindow::new(win_builder, ctx_builder, &events_loop).unwrap();
-   // gl::GetShaderInfoLog();
+    let windowed_context = ctx_builder.build_windowed(win_builder, &events_loop).unwrap();
+
     unsafe {
-        window.make_current().unwrap();
-    }
+        // It is essential to make the context current before calling `gl::load_with`.
+        windowed_context.make_current().unwrap()
+    };
 
     //Load gl library
-    gl::load_with(|s| window.get_proc_address(s) as *const _);
+    gl::load_with(|s| windowed_context.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
     let mut vao = rgl::gen_vertex_array();;
@@ -57,8 +58,7 @@ fn main() {
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
         rgl::draw_arrays(rgl::Primitive::Triangles, 0, 3);
 
-
-        window.swap_buffers().unwrap();
+        windowed_context.swap_buffers().unwrap();
     }
 
     //Cleanup

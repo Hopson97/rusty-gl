@@ -8,7 +8,7 @@ use shader_loader::load_shader;
 
 use gl::types::*;
 
-use glutin::GlContext;
+use glutin::ContextTrait;
 
 static VERTEX_POS: [GLfloat; 8] = [
     -0.5, -0.5, 
@@ -35,14 +35,15 @@ fn main() {
     let win_builder = glutin::WindowBuilder::new();
     let ctx_builder = glutin::ContextBuilder::new();
 
-    let window = glutin::GlWindow::new(win_builder, ctx_builder, &events_loop).unwrap();
-   // gl::GetShaderInfoLog();
+    let windowed_context = ctx_builder.build_windowed(win_builder, &events_loop).unwrap();
+
     unsafe {
-        window.make_current().unwrap();
-    }
+        // It is essential to make the context current before calling `gl::load_with`.
+        windowed_context.make_current().unwrap()
+    };
 
     //Load gl library
-    gl::load_with(|s| window.get_proc_address(s) as *const _);
+    gl::load_with(|s| windowed_context.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
     let mut vao = rgl::gen_vertex_array();
@@ -95,7 +96,7 @@ fn main() {
         unsafe {  gl::Clear(gl::COLOR_BUFFER_BIT); }
         rgl::draw_elements(rgl::Primitive::Triangles, 6, rgl::Type::UInt);
 
-        window.swap_buffers().unwrap();
+        windowed_context.swap_buffers().unwrap();
     }
 
     //Cleanupgt

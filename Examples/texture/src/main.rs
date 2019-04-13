@@ -8,7 +8,7 @@ mod shader_loader;
 use shader_loader::load_shader;
 use gl::types::*;
 
-use glutin::GlContext;
+use glutin::ContextTrait;
 use image::{GenericImage};
 
 static VERTEX_POS: [GLfloat; 8] = [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5];
@@ -24,14 +24,14 @@ fn main() {
     let win_builder = glutin::WindowBuilder::new();
     let ctx_builder = glutin::ContextBuilder::new();
 
-    let window = glutin::GlWindow::new(win_builder, ctx_builder, &events_loop).unwrap();
+    let windowed_context = ctx_builder.build_windowed(win_builder, &events_loop).unwrap();
     // gl::GetShaderInfoLog();
     unsafe {
-        window.make_current().unwrap();
+        windowed_context.make_current().unwrap();
     }
 
     //Load gl library
-    gl::load_with(|s| window.get_proc_address(s) as *const _);
+    gl::load_with(|s| windowed_context.get_proc_address(s) as *const _);
 
     //Create a vertex array object and a vertex buffer object
 
@@ -109,7 +109,7 @@ fn main() {
         }
         rgl::draw_elements(rgl::Primitive::Triangles, 6, rgl::Type::UInt);
 
-        window.swap_buffers().unwrap();
+        windowed_context.swap_buffers().unwrap();
     }
 
     //Cleanup
