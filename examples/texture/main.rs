@@ -66,12 +66,12 @@ fn main() {
 
     //Shaders!
     let shader_program = load_shader(
-        String::from("data/shader.vert"),
-        String::from("data/shader.frag"),
+        String::from("examples/texture/data/shader.vert"),
+        String::from("examples/texture/data/shader.frag"),
     );
     rgl::use_program(shader_program);
 
-    let buffer = image::open("data/texture.png").unwrap();
+    let buffer = image::open("examples/texture/data/texture.png").unwrap();
     let dim = buffer.dimensions();
     let mut texture = rgl::gen_texture();
     rgl::active_texture(0);
