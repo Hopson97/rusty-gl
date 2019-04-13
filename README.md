@@ -4,6 +4,8 @@ Note: This is a work in progress.
 
 Crate: https://crates.io/crates/rgl
 
+[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
+
 ## Summary
 
 Very thin wrapper over gl-rs, aiming to make code more "rust-like" and safer, while still allowing the control you have with classic OpenGL code.
