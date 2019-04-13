@@ -31,6 +31,8 @@ pub fn clear(mask: GLClearMask) {
 ///
 /// # Examples
 /// ```
+/// let vbo = rgl::gen_buffer();
+/// //...
 /// rgl::bind_buffer(rgl::Target::ArrayBuffer, vbo);
 /// rgl::draw_arrays(rgl::Primitive::Triangles, 0, 3);
 /// ```
@@ -46,7 +48,9 @@ pub fn draw_arrays(primitive: enums::Primitive, first: GLint, count: GLsizei) {
 ///
 /// # Examples
 /// ```
-/// rgl::bind_vertex_array(rgl::Target::ArrayBuffer, vao);
+/// let vao = rgl::gen_vertex_array();
+/// //...
+/// rgl::bind_vertex_array(vao);
 /// rgl::draw_elements(rgl::Primitive::Triangles, 36, rgl::Type::UInt);
 /// ```
 ///
@@ -62,7 +66,8 @@ pub fn draw_elements(primitive: enums::Primitive, count: GLsizei, type_: enums::
 ///
 /// # Examples
 /// ```
-/// rgl::bind_vertex_array(rgl::Target::ArrayBuffer, vao);
+/// let vao = rgl::gen_vertex_array();
+/// rgl::bind_vertex_array(vao);
 /// rgl::draw_elements_instanced(rgl::Primitive::Triangles, 36, rgl::Type::UInt, 8);
 /// ```
 ///

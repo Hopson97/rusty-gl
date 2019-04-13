@@ -6,16 +6,16 @@ use std::ptr;
 use super::enums;
 
 #[derive(Clone, Copy)]
-pub struct VAO(GLuint);
+pub struct VAO(pub GLuint);
 
 #[derive(Clone, Copy)]
-pub struct VBO(GLuint);
+pub struct VBO(pub GLuint);
 
 /// Generates vertex array objects
 ///
 /// # Examples
 /// ```
-/// let mut vao = 0;
+/// let mut vao = rgl::VAO(0);
 /// rgl::gen_vertex_arrays(1, &mut vao);
 /// ```
 ///
@@ -44,7 +44,7 @@ pub fn gen_vertex_array() -> VAO {
 ///
 /// # Examples
 /// ```
-/// let mut vbo = 0;
+/// let mut vbo = rgl::VBO(0);
 /// rgl::gen_buffers(1, &mut vbo);
 /// ```
 ///
@@ -60,7 +60,7 @@ pub fn gen_buffers(count: GLsizei, buffers: *mut VBO) {
 /// 
 /// # Examples
 /// ```
-/// let mut vbo = rgl::gen_vertex_buffer();
+/// let mut vbo = rgl::gen_buffer();
 /// ```
 pub fn gen_buffer() -> VBO {
     let mut vbo = VBO(0);
@@ -72,7 +72,7 @@ pub fn gen_buffer() -> VBO {
 ///
 /// # Examples
 /// ```
-/// let mut vao = 0;
+/// let mut vao = rgl::VAO(0);
 /// rgl::gen_vertex_arrays(1, &mut vao);
 /// rgl::bind_vertex_array(vao);
 /// ```
@@ -88,9 +88,8 @@ pub fn bind_vertex_array(array: VAO) {
 ///
 /// # Examples
 /// ```
-/// let mut vbo = 0;
-/// rgl::gen_buffers(1, &mut vbo);
-/// rgl::bind_vertex_array(vao);
+/// let vbo = rgl::gen_buffer();
+/// rgl::bind_buffer(rgl::Target::ArrayBuffer, vbo);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGenBuffers.xml
@@ -146,9 +145,15 @@ pub fn vertex_attrib_pointer(
 ///
 /// # Examples
 /// ```
+/// extern crate gl;
+/// 
+/// use rgl;
+/// use gl::types::*;
+/// 
+/// 
 /// let vertex_data: [GLfloat; 6] = [0.0, 0.5, 0.5, -0.5, -0.5, -0.5];
 /// //...
-/// rgl::buffer_data(rgl::Target::ArrayBuffer, &vertex_data, rgl::GLUsage::StaticDraw);
+/// rgl::buffer_data(rgl::Target::ArrayBuffer, &vertex_data, rgl::Usage::StaticDraw);
 /// ```
 ///
 /// More: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml
