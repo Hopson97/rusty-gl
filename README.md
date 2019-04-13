@@ -4,7 +4,7 @@ Note: This is a work in progress.
 
 Crate: https://crates.io/crates/rgl
 
-[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
+[![Build Status](https://travis-ci.org/Hopson97/rusty-gl.svg?branch=master)](https://travis-ci.org/Hopson97/rusty-gl)
 
 ## Summary
 
