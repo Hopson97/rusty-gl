@@ -37,6 +37,10 @@ pub fn delete_textures(count: GLsizei, texture: *mut Texture) {
     }
 }
 
+pub fn delete_texture(texture: *mut Texture) {
+    delete_textures(1, texture);
+}
+
 pub fn tex_image_2d(
     target: enums::TexTarget,
     level: GLint,

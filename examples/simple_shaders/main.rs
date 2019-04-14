@@ -74,7 +74,10 @@ fn main() {
     rgl::buffer_data(rgl::Target::ElementArrayBuffer, &INDICES, rgl::Usage::StaticDraw);
 
     //Shaders!
-    let shader_program = load_shader(String::from("data/shader.vert"), String::from("data/shader.frag"));
+    let shader_program = load_shader(
+        String::from("examples/simple_shaders/data/shader.vert"),
+        String::from("examples/simple_shaders/data/shader.frag")
+    );
     rgl::use_program(shader_program);
 
     //Main loop
@@ -99,11 +102,11 @@ fn main() {
         windowed_context.swap_buffers().unwrap();
     }
 
-    //Cleanupgt
-    rgl::delete_buffers(1, &mut ebo);
-    rgl::delete_buffers(1, &mut vbo);
-    rgl::delete_buffers(1, &mut colour_vbo);
-    rgl::delete_vertex_arrays(1, &mut vao);
+    //Cleanup
+    rgl::delete_buffer(&mut ebo);
+    rgl::delete_buffer(&mut vbo);
+    rgl::delete_buffer(&mut colour_vbo);
+    rgl::delete_vertex_array(&mut vao);
 
     rgl::delete_program(shader_program);
 }

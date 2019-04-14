@@ -66,12 +66,12 @@ fn main() {
 
     //Shaders!
     let shader_program = load_shader(
-        String::from("data/shader.vert"),
-        String::from("data/shader.frag"),
+        String::from("examples/texture/data/shader.vert"),
+        String::from("examples/texture/data/shader.frag"),
     );
     rgl::use_program(shader_program);
 
-    let buffer = image::open("data/texture.png").unwrap();
+    let buffer = image::open("examples/texture/data/texture.png").unwrap();
     let dim = buffer.dimensions();
     let mut texture = rgl::gen_texture();
     rgl::active_texture(0);
@@ -113,11 +113,11 @@ fn main() {
     }
 
     //Cleanup
-    rgl::delete_buffers(1, &mut ebo);
-    rgl::delete_buffers(1, &mut vbo);
-    rgl::delete_buffers(1, &mut tex_vbo);
-    rgl::delete_vertex_arrays(1, &mut vao);
+    rgl::delete_buffer(&mut ebo);
+    rgl::delete_buffer(&mut vbo);
+    rgl::delete_buffer(&mut tex_vbo);
+    rgl::delete_vertex_array(&mut vao);
 
-    rgl::delete_textures(1, &mut texture);
+    rgl::delete_texture(&mut texture);
     rgl::delete_program(shader_program);
 }

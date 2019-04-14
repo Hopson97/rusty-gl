@@ -62,6 +62,6 @@ fn main() {
     }
 
     //Cleanup
-    rgl::delete_buffers(1, &mut vbo);
-    rgl::delete_vertex_arrays(1, &mut vao);
+    rgl::delete_buffer(&mut vbo);
+    rgl::delete_vertex_array(&mut vao);
 }
