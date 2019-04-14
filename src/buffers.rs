@@ -14,7 +14,7 @@ pub struct VBO(pub GLuint);
 /// Generates vertex array objects
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let mut vao = rgl::VAO(0);
 /// rgl::gen_vertex_arrays(1, &mut vao);
 /// ```
@@ -31,7 +31,7 @@ pub fn gen_vertex_arrays(count: GLsizei, arrays: *mut VAO) {
 /// No need to create the VAO seperatly!
 /// 
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let mut vao = rgl::gen_vertex_array();
 /// ```
 pub fn gen_vertex_array() -> VAO {
@@ -43,7 +43,7 @@ pub fn gen_vertex_array() -> VAO {
 /// Generates some buffer objects
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let mut vbo = rgl::VBO(0);
 /// rgl::gen_buffers(1, &mut vbo);
 /// ```
@@ -59,7 +59,7 @@ pub fn gen_buffers(count: GLsizei, buffers: *mut VBO) {
 /// No need to create the VBO seperatly!
 /// 
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let mut vbo = rgl::gen_buffer();
 /// ```
 pub fn gen_buffer() -> VBO {
@@ -71,7 +71,7 @@ pub fn gen_buffer() -> VBO {
 /// Bind a vertex array object
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let mut vao = rgl::VAO(0);
 /// rgl::gen_vertex_arrays(1, &mut vao);
 /// rgl::bind_vertex_array(vao);
@@ -87,7 +87,7 @@ pub fn bind_vertex_array(array: VAO) {
 /// Bind a vertex buffer
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let vbo = rgl::gen_buffer();
 /// rgl::bind_buffer(rgl::Target::ArrayBuffer, vbo);
 /// ```
@@ -102,7 +102,7 @@ pub fn bind_buffer(target: enums::Target, buffer: VBO) {
 /// Enable a generic vertex attribute array
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// rgl::enable_vertex_attrib_array(0);
 /// ```
 ///
@@ -116,7 +116,7 @@ pub fn enable_vertex_attrib_array(index: GLuint) {
 /// Define an array of generic vertex attribute data
 ///
 /// # Examles
-/// ```
+/// ```rust,no_run
 /// rgl::vertex_attrib_pointer(0, 2, rgl::Type::Float, false, 0);
 /// ```
 ///
@@ -144,7 +144,7 @@ pub fn vertex_attrib_pointer(
 /// Creates and initalizes a buffer object data store
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// extern crate gl;
 /// 
 /// use rgl;
