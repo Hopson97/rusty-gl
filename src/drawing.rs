@@ -8,7 +8,7 @@ use super::enums;
 /// Specify clear values for the color buffers
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// rgl::clear_color(0.5, 0.5, 0.2, 1.0);
 /// ```
 ///
@@ -30,7 +30,7 @@ pub fn clear(mask: GLClearMask) {
 /// Render primitives from array data
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let vbo = rgl::gen_buffer();
 /// //...
 /// rgl::bind_buffer(rgl::Target::ArrayBuffer, vbo);
@@ -47,7 +47,7 @@ pub fn draw_arrays(primitive: enums::Primitive, first: GLint, count: GLsizei) {
 /// Render primitives from array data
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let vao = rgl::gen_vertex_array();
 /// //...
 /// rgl::bind_vertex_array(vao);
@@ -65,7 +65,7 @@ pub fn draw_elements(primitive: enums::Primitive, count: GLsizei, type_: enums::
 /// Draw multiple instances of a set of elements
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// let vao = rgl::gen_vertex_array();
 /// rgl::bind_vertex_array(vao);
 /// rgl::draw_elements_instanced(rgl::Primitive::Triangles, 36, rgl::Type::UInt, 8);
