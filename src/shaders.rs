@@ -259,12 +259,12 @@ pub fn uniform_matrix_2fv(location: UniformLocation, count: GLsizei, transpose: 
 
 pub fn uniform_matrix_3fv(location: UniformLocation, count: GLsizei, transpose: GLboolean, value: *const GLfloat) {
     unsafe {
-        gl::UniformMatrix2fv(location.0, count, transpose, value);
+        gl::UniformMatrix3fv(location.0, count, transpose, value);
     }
 }
 
 pub fn uniform_matrix_4fv(location: UniformLocation, count: GLsizei, transpose: GLboolean, value: *const GLfloat) {
     unsafe {
-        gl::UniformMatrix2fv(location.0, count, transpose, value);
+        gl::UniformMatrix4fv(location.0, count, transpose, value);
     }
 }
