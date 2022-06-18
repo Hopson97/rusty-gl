@@ -27,7 +27,7 @@ Current tuple structs:
 * `pub struct GLTexture(GLuint);` for texture objects
 * `pub struct GLShader(GLuint);` for programs/ shader object
 
-These structs have no implemention (assosiated function), they are just there to enforce that the correct OpenGL functions are passed into functions.
+These structs have no implementation (associated function), they are just there to enforce that the correct OpenGL functions are passed into functions.
 For example:
 
 ```rust
@@ -44,7 +44,7 @@ would not work, as `gl_bind_buffer` expects type `struct VBO(GLuint)`, but vao i
 
 # Usage
 ```toml
-[dependancies]
+[dependencies]
 rgl = "0.2.0"
 gl = "0.6.0"
 ```
@@ -120,4 +120,5 @@ Changes include:
 Examples on using this crate can be found in the examples folder: https://github.com/Hopson97/rusty-gl/tree/master/Examples
 
 Run the examples with `cargo run`.
+
 
